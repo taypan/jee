@@ -25,30 +25,30 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 
-import cz.cvut.fel.jee.model.Member;
+import cz.cvut.fel.jee.model.User;
 
 @RequestScoped
-public class MemberListProducer {
+public class UserListProducer {
 
     @Inject
-    private MemberRepository memberRepository;
+    private UserRepository userRepository;
 
-    private List<Member> members;
+    private List<User> users;
 
-    // @Named provides access the return value via the EL variable name "members" in the UI (e.g.
+    // @Named provides access the return value via the EL variable name "users" in the UI (e.g.
     // Facelets or JSP view)
     @Produces
     @Named
-    public List<Member> getMembers() {
-        return members;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void onMemberListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final Member member) {
-        retrieveAllMembersOrderedByName();
+    public void onUserListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final User user) {
+        retrieveAllUsersOrderedByName();
     }
 
     @PostConstruct
-    public void retrieveAllMembersOrderedByName() {
-        members = memberRepository.findAllOrderedByName();
+    public void retrieveAllUsersOrderedByName() {
+        users = userRepository.findAllOrderedByName();
     }
 }

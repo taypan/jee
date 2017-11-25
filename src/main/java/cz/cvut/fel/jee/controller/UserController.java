@@ -24,37 +24,37 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import cz.cvut.fel.jee.model.Member;
-import cz.cvut.fel.jee.service.MemberRegistration;
+import cz.cvut.fel.jee.model.User;
+import cz.cvut.fel.jee.service.UserRegistration;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
 // EL name
 // Read more about the @Model stereotype in this FAQ:
 // http://www.cdi-spec.org/faq/#accordion6
 @Model
-public class MemberController {
+public class UserController {
 
     @Inject
     private FacesContext facesContext;
 
     @Inject
-    private MemberRegistration memberRegistration;
+    private UserRegistration userRegistration;
 
     @Produces
     @Named
-    private Member newMember;
+    private User newUser;
 
     @PostConstruct
-    public void initNewMember() {
-        newMember = new Member();
+    public void initNewUser() {
+        newUser = new User();
     }
 
     public void register() throws Exception {
         try {
-            memberRegistration.register(newMember);
+            userRegistration.register(newUser);
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
             facesContext.addMessage(null, m);
-            initNewMember();
+            initNewUser();
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
