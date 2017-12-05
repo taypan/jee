@@ -30,6 +30,9 @@
          <!-- Properties for Hibernate -->
          <property name="hibernate.hbm2ddl.auto" value="create-drop" />
          <property name="hibernate.show_sql" value="false" />
+         <!-- VASEK - EM JNDI -->
+         <property name="jboss.entity.manager.jndi.name" value="java:/defaultEntityManager"/>
+         <property name="jboss.entity.manager.factory.jndi.name" value="java:/defaultEntityManagerFactory"/>
       </properties>
    </persistence-unit>
 </persistence>

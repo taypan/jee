@@ -3,15 +3,13 @@ package cz.cvut.fel.jee.rest.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
  * @author Vaclav Rechtberger
  */
 @Entity
-@Table(name="galleries")
-public class Gallery {
+public class Child {
     @Id
     @GeneratedValue
     private long id;
@@ -19,7 +17,11 @@ public class Gallery {
     @NotNull
     private String name;
 
-    public Gallery() {
+    public Child(String name) {
+        this.name = name;
+    }
+
+    public Child() {
     }
 
     public long getId() {

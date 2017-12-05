@@ -3,19 +3,50 @@ package cz.cvut.fel.jee.rest.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.UUID;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  * @author Vaclav Rechtberger
  */
-public class Product extends RestObject{
+@Entity
+@Table(name="products")
+public class Product implements Serializable{
+
+    @Id @GeneratedValue
+    private long id;
+    @NotNull
+    @Size(min = 2, max = 25)
+    @Pattern(regexp = "[a-zA-Z0-9ěščřžýáíéúůďťó]", message = "Must contains only alfanumeric symbols and \"-\", \":\", \",\" or <space>")
     private String name;
+    @NotNull
+    @Size(min = 2, max = 25)
+    @Pattern(regexp = "[a-zA-Z0-9ěščřžýáíéúůďťó]", message = "Must contains only alfanumeric symbols and \"-\", \":\", \",\" or <space>")
     private String description;
+    @NotNull
+    @Size(min = 2, max = 25)
+    @Pattern(regexp = "[a-zA-Z0-9ěščřžýáíéúůďťó]", message = "Must contains only alfanumeric symbols and \"-\", \":\", \",\" or <space>")
     private String manufacturer;                //ID ref
+    @NotNull
+    @Size(min = 2, max = 25)
+    @Pattern(regexp = "[a-zA-Z0-9ěščřžýáíéúůďťó]", message = "Must contains only alfanumeric symbols and \"-\", \":\", \",\" or <space>")
     private String model;                       //manufacturer model id
+    @NotNull
+    @Size(min = 2, max = 25)
+    @Pattern(regexp = "[a-zA-Z0-9ěščřžýáíéúůďťó]", message = "Must contains only alfanumeric symbols and \"-\", \":\", \",\" or <space>")
     private String EAN;
+    @NotNull
+    @Min(0)
     private double price;
-    private String gallery;                     //ID ref
+    @NotNull
+    @OneToOne
+    private Gallery gallery;
 
     @JsonCreator
     public Product(@JsonProperty("name") String name,
@@ -24,21 +55,33 @@ public class Product extends RestObject{
                    @JsonProperty("model") String model,
                    @JsonProperty("EAN") String EAN,
                    @JsonProperty("price") double price,
-                   @JsonProperty("gallery") String gallery) {
+                   @JsonProperty("gallery") long gallery) throws NamingException {
         this.name = name;
         this.description = description;
-        this.manufacturer = manufacturer;
         this.model = model;
         this.EAN = EAN;
         this.price = price;
-        this.gallery = gallery;
+        EntityManager entityManager = InitialContext.doLookup("java:/defaultEntityManager");
+        this.manufacturer = manufacturer;
+        this.gallery = entityManager.find(Gallery.class,gallery);
     }
 
-    public String getGallery() {
+    public Product() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Gallery getGallery() {
         return gallery;
     }
 
-    public void setGallery(String gallery) {
+    public void setGallery(Gallery gallery) {
         this.gallery = gallery;
     }
 
