@@ -24,3 +24,12 @@ hs_err_pid*
 #target
 /target
 /target/*
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Maven
+log/
+target/

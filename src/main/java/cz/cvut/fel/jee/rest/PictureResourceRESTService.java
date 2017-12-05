@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author Vaclav Rechtberger
  */
-@Path("/galleries")
+@Path("/pictures")
 @ApplicationScoped
 public class PictureResourceRESTService {
     private static class Picture {
