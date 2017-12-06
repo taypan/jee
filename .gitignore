@@ -29,6 +29,10 @@ hs_err_pid*
 .idea/
 *.iml
 *.iws
+.idea/copyright/profiles_settings.xml
+.idea/vcs.xml
+.idea/workspace.xml
+
 
 # Maven
 log/
