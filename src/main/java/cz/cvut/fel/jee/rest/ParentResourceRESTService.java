@@ -1,21 +1,17 @@
 package cz.cvut.fel.jee.rest;
 
-import cz.cvut.fel.jee.rest.model.Child;
-import cz.cvut.fel.jee.rest.model.Parent;
-import cz.cvut.fel.jee.rest.model.Product;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import cz.cvut.fel.jee.rest.model.old.Child;
+import cz.cvut.fel.jee.rest.model.old.Parent;
 import cz.cvut.fel.jee.service.ParentAndChildService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 /**
  * @author Vaclav Rechtberger
@@ -28,6 +24,7 @@ public class ParentResourceRESTService {
     EntityManager entityManager;
     @Inject
     ParentAndChildService service;
+
 
     @GET
     @Path("/default")

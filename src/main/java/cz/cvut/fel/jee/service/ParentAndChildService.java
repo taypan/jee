@@ -1,17 +1,11 @@
 package cz.cvut.fel.jee.service;
 
-import cz.cvut.fel.jee.rest.model.Child;
-import cz.cvut.fel.jee.rest.model.Parent;
-import cz.cvut.fel.jee.rest.model.Product;
+import cz.cvut.fel.jee.rest.model.old.Child;
+import cz.cvut.fel.jee.rest.model.old.Parent;
 
 import javax.ejb.Stateless;
 import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
-import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.util.List;
 
 /**
@@ -21,39 +15,40 @@ import java.util.List;
 @ApplicationScoped
 public class ParentAndChildService {
     @Inject
-    EntityManager em;
+    GenericService<Child> childService;// = new GenericService<>();
+    @Inject
+    GenericService<Parent> parentService;// = new GenericService<>();
 
     public void createParent(Parent parent) throws Exception {
         System.out.println("Creating parent " + parent.getName());
-        em.persist(parent);
+        parentService.create(parent);
+        //em.persist(parent);
         //productEventSrc.fire(product);
     }
 
     public void createChild(Child child) throws Exception {
         System.out.println("Creating child " + child.getName());
-        em.persist(child);
+        childService.create(child);
         //productEventSrc.fire(product);
     }
 
     public List<Parent> findAll() {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
+        /*CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Parent> criteria = cb.createQuery(Parent.class);
         Root<Parent> parentRoot = criteria.from(Parent.class);
         // Swap criteria statements if you would like to try out type-safe criteria queries, a new
         // feature in JPA 2.0
         // criteria.select(member).orderBy(cb.asc(member.get(Member_.name)));
         criteria.select(parentRoot);
-        return em.createQuery(criteria).getResultList();
+        return em.createQuery(criteria).getResultList();*/
+        return parentService.findAll();
     }
 
     public Child findChildById(Long id){
-        return em.find(Child.class, id);
+        return childService.findById(id);
     }
 
     public void updateParent(Parent parent) throws Exception {
-        Parent parent2 = em.find(Parent.class,parent.getId());
-
-        parent2.setName(parent.getName());
-        parent2.setChild(parent.getChild());
+        parentService.update(parent);
     }
 }

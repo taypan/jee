@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 /**
  * @author Vaclav Rechtberger
  */
-@Entity
 public enum OrderStatus {
-    NEW,PAIED,SHIPPED,CLOSED,ABORTED;
+    NEW,PAID,SHIPPED,CLOSED,ABORTED;
 }

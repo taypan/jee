@@ -1,6 +1,6 @@
 package cz.cvut.fel.jee.service;
 
-import cz.cvut.fel.jee.model.Product;
+import cz.cvut.fel.jee.model.Address;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -13,12 +13,12 @@ import javax.persistence.EntityManager;
  */
 @Stateless
 @ApplicationScoped
-public class ProductService extends GenericService<Product> {
+public class AddressService extends GenericService<Address> {
     @Inject
     EntityManager entityManager;
 
-    public ProductService() {
-        super(Product.class, null);
+    public AddressService() {
+        super(Address.class, null);
     }
 
     @PostConstruct
