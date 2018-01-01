@@ -4,7 +4,7 @@ import cz.cvut.fel.jee.model.Account;
 import cz.cvut.fel.jee.model.Order;
 import cz.cvut.fel.jee.model.Role;
 import cz.cvut.fel.jee.service.LineItemService;
-//import cz.cvut.fel.jee.service.OrderQueueService;
+import cz.cvut.fel.jee.service.OrderQueueService;
 import cz.cvut.fel.jee.service.OrderService;
 import cz.cvut.fel.jee.util.PasswordEncryptionService;
 
@@ -26,8 +26,8 @@ public class OrderRESTService {
     @Inject
     OrderService orderService;
 
-//    @Inject
-//    OrderQueueService orderQueueService;
+    @Inject
+    OrderQueueService orderQueueService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -64,7 +64,7 @@ public class OrderRESTService {
     public Response create(Order order) {
         try{
             orderService.create(order);
-            //orderQueueService.sendMessage(""+order.getId());
+            orderQueueService.sendMessage(""+order.getId());
         }catch (Exception e){
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
