@@ -17,14 +17,15 @@
 <!DOCTYPE html>
 <html>
 
-<button onclick="loadData()">Get users</button>
+<button onclick="loadData()">Get users through REST service</button>
 
 <head>
     <script src="keycloak.js"></script>
     <script>
         var keycloak = Keycloak();
 
-        keycloak.init({ onLoad: 'login-required' });
+        // keycloak.init({ onLoad: 'login-required' });
+        keycloak.init({ onLoad: 'check-sso' });
 
         var loadData = function () {
 
