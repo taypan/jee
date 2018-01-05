@@ -1,0 +1,8 @@
+{
+  "realm": "jee-eshop",
+  "auth-server-url": "http://localhost:8180/auth",
+  "ssl-required": "external",
+  "resource": "jee-eshop",
+  "public-client": true,
+  "use-resource-role-mappings": true
+}
