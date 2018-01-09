@@ -1,0 +1,68 @@
+# Run: ./jboss-cli.sh --connect --file=domain.cli
+# This script at first stops and removes all resources if they exist (servers, server-group, datasource, driver)
+# and then recreates them again
+
+
+set MASTER=master
+set SLAVE=slave
+
+set SERVER_GROUP=eshopGroup
+set SERVER_NAME_ONE=eshop-server-one
+set SERVER_NAME_TWO=eshop-server-two
+
+
+set DATASOURCE=eshopDB
+
+#cp -r postgresql modules/system/layers/base/org/
+
+if (outcome == success) of /server-group=$SERVER_GROUP:read-resource
+    /server-group=$SERVER_GROUP:stop-servers(blocking=true)
+end-if
+
+if (outcome == success) of /host=$MASTER/server-config=$SERVER_NAME_ONE:read-resource
+    /host=$MASTER/server-config=$SERVER_NAME_ONE:remove
+end-if
+
+if (outcome == success) of /host=$SLAVE/server-config=$SERVER_NAME_TWO:read-resource
+    /host=$SLAVE/server-config=$SERVER_NAME_TWO:remove
+end-if
+
+if (outcome == success) of /server-group=$SERVER_GROUP:read-resource
+    /server-group=$SERVER_GROUP:remove
+end-if
+
+
+# driver
+if (outcome == success) of /profile=default/subsystem=datasources/data-source=$DATASOURCE:read-resource
+    /profile=default/subsystem=datasources/data-source=$DATASOURCE:remove
+end-if
+
+if (outcome == success) of /profile=default/subsystem=datasources/jdbc-driver=postgresql:read-resource
+    /profile=default/subsystem=datasources/jdbc-driver=postgresql:remove
+end-if
+
+
+
+# Add driver
+#/profile=default/subsystem=datasources/jdbc-driver=postgresql:add(driver-name=postgresql,driver-module-name=org.postgresql,driver-xa-datasource-class-name=org.postgresql.xa.PGXADataSource)
+/profile=default/subsystem=datasources/jdbc-driver=postgresql:add(driver-name=postgresql,driver-module-name=org.postgresql,driver-class-name=org.postgresql.Driver)
+
+
+# Add a non-XA datasource
+/profile=default/subsystem=datasources/data-source=$DATASOURCE:add(jndi-name="java:jboss/datasources/eshopDS",  driver-name=postgresql,  connection-url="jdbc:postgresql://localhost:5432/postgres", user-name="sa", password="sa", enabled=true, use-java-context=true )
+
+
+# Add server group "$SERVER_GROUP"
+/server-group=$SERVER_GROUP:add(profile="default", socket-binding-group="standard-sockets")
+
+# Add one server to group "$SERVER_GROUP" on $MASTER
+/host=$MASTER/server-config=$SERVER_NAME_ONE:add(auto-start=true,group=$SERVER_GROUP, socket-binding-port-offset=350, socket-binding-group="standard-sockets")
+
+# Add one server to group "$SERVER_GROUP" on $SLAVE
+/host=$SLAVE/server-config=$SERVER_NAME_TWO:add(auto-start=true,group=$SERVER_GROUP, socket-binding-port-offset=450, socket-binding-group="standard-sockets")
+
+# Start "servers"
+/server-group=$SERVER_GROUP:start-servers(blocking=true)
+
+
+
