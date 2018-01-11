@@ -50,4 +50,8 @@ public class GenericService<T extends Serializable & Identifiable> {
         //parent2.setName(parent.getName());
         //parent2.setChild(parent.getChild());
     }
+
+    public void delete(T entity){
+        entityManager.remove(entity);
+    }
 }

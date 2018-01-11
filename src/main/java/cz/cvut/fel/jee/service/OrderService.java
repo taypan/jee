@@ -1,6 +1,7 @@
 package cz.cvut.fel.jee.service;
 
 import cz.cvut.fel.jee.model.Order;
+import cz.cvut.fel.jee.validation.anotations.ValidOrder;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -25,4 +26,5 @@ public class OrderService extends GenericService<Order> {
     private void setEntityManager(){
         super.entityManager = this.entityManager;
     }
+
 }

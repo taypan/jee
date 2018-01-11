@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import cz.cvut.fel.jee.validation.anotations.ValidOrder;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;

@@ -4,7 +4,6 @@
     Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
     contributors by the @authors tag. See the copyright.txt in the
     distribution for a full listing of individual contributors.
-
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
@@ -16,7 +15,7 @@
     limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cz.cvut.fel.jee</groupId>
@@ -36,16 +35,16 @@
     </licenses>
 
     <properties>
-        <!-- Explicitly declaring the source encoding eliminates the following 
+        <!-- Explicitly declaring the source encoding eliminates the following
             message: -->
-        <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
+        <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered
             resources, i.e. build is platform dependent! -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- JBoss dependency versions -->
-        <version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
+        <version.wildfly.maven.plugin>1.2.1.Final</version.wildfly.maven.plugin>
 
-        <!-- Define the version of the JBoss BOMs we want to import to specify 
+        <!-- Define the version of the JBoss BOMs we want to import to specify
             tested stacks. -->
         <version.jboss.bom>8.2.1.Final</version.jboss.bom>
 
@@ -55,16 +54,16 @@
         <version.war.plugin>2.5</version.war.plugin>
 
         <!-- maven-compiler-plugin -->
-        <maven.compiler.target>1.7</maven.compiler.target>
-        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
 
 
     <dependencyManagement>
         <dependencies>
             <!-- JBoss distributes a complete set of Java EE 7 APIs including a Bill
-                of Materials (BOM). A BOM specifies the versions of a "stack" (or a collection) 
-                of artifacts. We use this here so that we always get the correct versions 
+                of Materials (BOM). A BOM specifies the versions of a "stack" (or a collection)
+                of artifacts. We use this here so that we always get the correct versions
                 of artifacts. Here we use the jboss-javaee-7.0-with-tools stack (you can
                 read this as the JBoss stack of the Java EE 7 APIs, with some extras tools
                 for your project, such as Arquillian for testing) and the jboss-javaee-7.0-with-hibernate
@@ -89,10 +88,10 @@
 
     <dependencies>
 
-        <!-- First declare the APIs we depend on and need for compilation. All 
+        <!-- First declare the APIs we depend on and need for compilation. All
             of them are provided by JBoss WildFly -->
 
-        <!-- Import the CDI API, we use provided scope as the API is included in 
+        <!-- Import the CDI API, we use provided scope as the API is included in
             JBoss WildFly -->
         <dependency>
             <groupId>javax.enterprise</groupId>
@@ -100,7 +99,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Import the Common Annotations API (JSR-250), we use provided scope 
+        <!-- Import the Common Annotations API (JSR-250), we use provided scope
             as the API is included in JBoss WildFly -->
         <dependency>
             <groupId>org.jboss.spec.javax.annotation</groupId>
@@ -108,7 +107,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Import the JAX-RS API, we use provided scope as the API is included 
+        <!-- Import the JAX-RS API, we use provided scope as the API is included
             in JBoss WildFly -->
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
@@ -116,14 +115,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>2.9.1</version>
-        </dependency>
-
-        <!-- Import the JPA API, we use provided scope as the API is included in 
+        <!-- Import the JPA API, we use provided scope as the API is included in
             JBoss WildFly -->
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
@@ -131,7 +123,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Import the EJB API, we use provided scope as the API is included in 
+        <!-- Import the EJB API, we use provided scope as the API is included in
             JBoss WildFly -->
         <dependency>
             <groupId>org.jboss.spec.javax.ejb</groupId>
@@ -164,7 +156,7 @@
 
         <!-- Now we declare any tools needed -->
 
-        <!-- Annotation processor to generate the JPA 2.0 metamodel classes for 
+        <!-- Annotation processor to generate the JPA 2.0 metamodel classes for
             typesafe criteria queries -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -172,7 +164,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Annotation processor that raising compilation errors whenever constraint 
+        <!-- Annotation processor that raising compilation errors whenever constraint
             annotations are incorrectly used. -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -188,7 +180,7 @@
         </dependency>
 
         <!-- Optional, but highly recommended -->
-        <!-- Arquillian allows you to test enterprise code such as EJBs and Transactional(JTA) 
+        <!-- Arquillian allows you to test enterprise code such as EJBs and Transactional(JTA)
             JPA from JUnit/TestNG -->
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
@@ -201,19 +193,20 @@
             <artifactId>arquillian-protocol-servlet</artifactId>
             <scope>test</scope>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
         <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jackson-provider</artifactId>
-            <version>3.0.8.Final</version>
-            <scope>provided</scope>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.0-801.jdbc4</version>
         </dependency>
 
-        <dependency><!-- test -->
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-asl</artifactId>
-            <version>1.5.0</version>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.9.1</version>
         </dependency>
+
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -227,41 +220,16 @@
             <version>1.9.13</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.activemq.examples.jms/artemis-jms-context-example -->
-        <dependency>
-            <groupId>org.apache.activemq.examples.jms</groupId>
-            <artifactId>artemis-jms-context-example</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.wildfly/wildfly-messaging-activemq -->
         <dependency>
             <groupId>org.wildfly</groupId>
             <artifactId>wildfly-messaging-activemq</artifactId>
             <version>10.0.0.CR1</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-core -->
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-core</artifactId>
-            <version>5.7.0</version>
-        </dependency>
-
-<!--
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-broker</artifactId>
-        </dependency> -->
-
     </dependencies>
 
     <build>
-        <!-- Maven will append the version to the finalName (which is the name 
+        <!-- Maven will append the version to the finalName (which is the name
             given to the generated war, and hence the context root) -->
         <finalName>${project.artifactId}</finalName>
         <plugins>
@@ -279,34 +247,30 @@
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <version>${version.wildfly.maven.plugin}</version>
+                <configuration>
+                    <beforeDeployment>
+                        <commands>
+                            <!--<command>data-source add -jndi-name=java:jboss/datasources/eshopDS -name=eshopDB -connection-url=jdbc:h2:mem:test;DB_CLOSE_DELAY=-1 -driver-name=h2 -user-name=sa -password=sa</command>
+                            <command>jms-queue add -queue-address=OrderQueue2 -durable=false -entries=["java:/jms/queue/OrderQueue2"]</command>-->
+                        </commands>
+                    </beforeDeployment>
+                </configuration>
+
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.4.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <mainClass>com.redhat.brq.integration.activemq.Main</mainClass>
-                    <executable>maven</executable>
-                    <!-- <workingDirectory>/tmp</workingDirectory> -->
-                    <arguments>
-                        <argument>-p</argument>
-                        <argument>-c</argument>
-                    </arguments>
+                    <compilerVersion>1.8</compilerVersion>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <useIncrementalCompilation>false</useIncrementalCompilation>
+                    <compilerArgs>
+                        <arg>-Xlint:deprecation</arg>
+                        <arg>-Xlint:unchecked</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
         </plugins>
@@ -314,9 +278,9 @@
 
     <profiles>
         <profile>
-            <!-- The default profile skips all tests, though you can tune it to run 
+            <!-- The default profile skips all tests, though you can tune it to run
                 just unit tests based on a custom pattern -->
-            <!-- Seperate profiles are provided for running all tests, including Arquillian 
+            <!-- Seperate profiles are provided for running all tests, including Arquillian
                 tests that execute in the specified container -->
             <id>default</id>
             <activation>
@@ -367,11 +331,11 @@
         </profile>
 
         <profile>
-            <!-- When built in OpenShift the 'openshift' profile will be used when 
+            <!-- When built in OpenShift the 'openshift' profile will be used when
                 invoking mvn. -->
-            <!-- Use this profile for any OpenShift specific customization your app 
+            <!-- Use this profile for any OpenShift specific customization your app
                 will need. -->
-            <!-- By default that is to put the resulting archive into the 'deployments' 
+            <!-- By default that is to put the resulting archive into the 'deployments'
                 folder. -->
             <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
             <id>openshift</id>
@@ -384,32 +348,6 @@
                             <outputDirectory>deployments</outputDirectory>
                             <warName>ROOT</warName>
                         </configuration>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.wildfly.plugins</groupId>
-                        <artifactId>wildfly-maven-plugin</artifactId>
-                        <version>${version.wildfly.maven.plugin}</version>
-                        <executions>
-                            <execution>
-                                <id>add-jms-queue</id>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>add-resource</goal>
-                                </goals>
-                                <configuration>
-                                    <resources>
-                                        <resource>
-                                            <address>subsystem=messaging,hornetq-server=default,jms-queue=myJmsQueue</address>
-                                            <properties>
-                                                <durable>true</durable>
-                                                <entries>!!["java:jboss/myJmsQueue", "java:jboss/myJmsQueueAlias"]</entries>
-                                            </properties>
-                                        </resource>
-                                    </resources>
-                                </configuration>
-                            </execution>
-                        </executions>
                     </plugin>
                 </plugins>
             </build>

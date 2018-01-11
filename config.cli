@@ -1,0 +1,2 @@
+connect localhost 10090
+jms-queue add --queue-address=OrderQueue --durable=false --entries=["java:/jms/queue/OrderQueue"]
