@@ -1,97 +1,118 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-    JBoss, Home of Professional Open Source
-    Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
-    contributors by the @authors tag. See the copyright.txt in the
-    distribution for a full listing of individual contributors.
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<ui:composition template="/applayout/pageTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+            <ui:define name="content">
+                <h:outputStylesheet library="bsf" name="css/thumbnails.css"/>
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-    http://www.apache.org/licenses/LICENSE-2.0
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    template="/WEB-INF/templates/default.xhtml">
-    <ui:define name="content">
-        <h1>Welcome to WildFly!</h1>
+                <style>
+                    .thumbnail { max-width: 100%; }
+                    img.thumbnail:hover, img.thumbnail:focus {
+                        border: 1px solid;
+                        border-color: #428BCA;
+                    }
+                </style>
+                <h1>Examples</h1>
 
-        <div>
-            <p>You have successfully deployed a Java EE 7 Enterprise
-                Application.</p>
-            <h3>Your application can run on:</h3>
-            <img src="resources/gfx/wildfly_400x130.jpg" />
-        </div>
+                <hr />
+                    <h:link value="Signin page" outcome="signin" />
+                <hr />
+                    <h:link value="Store page" outcome="store" />
+                <hr />
+                    <h:link value="Detail page" outcome="detail" />
+                <hr />
 
-        <h:form id="reg">
-            <h2>User Registration</h2>
-            <p>Enforces annotation-based constraints defined on the
-                model class.</p>
-            <h:panelGrid columns="3" columnClasses="titleCell">
-                <h:outputLabel for="name" value="Name:" />
-                <h:inputText id="name" value="#{newUser.name}" />
-                <h:message for="name" errorClass="invalid" />
-
-                <h:outputLabel for="email" value="Email:" />
-                <h:inputText id="email" value="#{newUser.email}" />
-                <h:message for="email" errorClass="invalid" />
-
-                <h:outputLabel for="phoneNumber" value="Phone #:" />
-                <h:inputText id="phoneNumber"
-                    value="#{newUser.phoneNumber}" />
-                <h:message for="phoneNumber" errorClass="invalid" />
-            </h:panelGrid>
-
-            <p>
-                <h:panelGrid columns="2">
-                    <h:commandButton id="register"
-                        action="#{userController.register}"
-                        value="Register" styleClass="register" />
-                    <h:messages styleClass="messages"
-                        errorClass="invalid" infoClass="valid"
-                        warnClass="warning" globalOnly="true" />
-                </h:panelGrid>
-            </p>
-        </h:form>
-        <h2>Users</h2>
-        <h:panelGroup rendered="#{empty users}">
-            <em>No registered users.</em>
-        </h:panelGroup>
-        <h:dataTable var="_user" value="#{users}"
-            rendered="#{not empty users}"
-            styleClass="simpletablestyle">
-            <h:column>
-                <f:facet name="header">Id</f:facet>
-                #{_user.id}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Name</f:facet>
-                #{_user.name}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Email</f:facet>
-                #{_user.email}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Phone #</f:facet>
-                #{_user.phoneNumber}
-            </h:column>
-            <h:column>
-                <f:facet name="header">REST URL</f:facet>
-                <a
-                    href="#{request.contextPath}/rest/users/#{_user.id}">/rest/users/#{_user.id}</a>
-            </h:column>
-            <f:facet name="footer">
-            REST URL for all users: <a
-                    href="#{request.contextPath}/rest/users">/rest/users</a>
-            </f:facet>
-        </h:dataTable>
-    </ui:define>
-</ui:composition>
+                <p>These BootsFaces examples are ports of Bootstrap 3 examples.</p>
+                <p>They are built using JSF and BootsFaces's components, to show the framework in action and how it can be used to build your pages.</p>
+                <p>You can get them as a point of start for developing your projects.</p>
+                <b:row>
+                    <!-- Row 1 -->
+                    <b:column span="4">
+                        <h:link outcome="starter_template">
+                            <h:graphicImage library="examples" class="thumbnail" name="starter-template.jpg"/>
+                        </h:link>
+                        <h4>Starter template</h4>
+                        <p>Nothing but the basics: compiled CSS and JavaScript along with a container.</p>
+                    </b:column>
+                    <b:column span="4">
+                        <h:link outcome="grid">
+                            <h:graphicImage library="examples" class="thumbnail" name="grid.jpg"/>
+                        </h:link>
+                        <h4>Grids</h4>
+                        <p>Multiple examples of grid layouts with all four tiers, nesting, and more.</p>
+                    </b:column>
+                    <b:column span="4">
+                        <h:link outcome="jumbotron">
+                            <h:graphicImage library="examples" class="thumbnail" name="jumbotron.jpg"/>
+                        </h:link>
+                        <h4>Jumbotron</h4>
+                        <p>Build around the jumbotron with a navbar and some basic grid columns.</p>
+                    </b:column>
+                    <!-- Row 2 -->
+                    <b:column span="4">
+                        <h:link outcome="navbar">
+                            <h:graphicImage library="examples" class="thumbnail" name="navbar.jpg"/>
+                        </h:link>
+                        <h4>Navbar</h4>
+                        <p>Super basic template that includes the navbar along with some additional content.</p>
+                    </b:column>
+                    <b:column span="4">
+                        <h:link outcome="navbar-static-top">
+                            <h:graphicImage library="examples" class="thumbnail" name="navbar-static.jpg"/>
+                        </h:link>
+                        <h4>Static top navbar</h4>
+                        <p>Super basic template with a static top navbar along with some additional content.</p>
+                    </b:column>
+                    <b:column span="4">
+                        <h:link outcome="navbar-fixed-top">
+                            <h:graphicImage library="examples" class="thumbnail" name="navbar-fixed.jpg"/>
+                        </h:link>
+                        <h4>Fixed navbar</h4>
+                        <p>Super basic template with a fixed top navbar along with some additional content.</p>
+                    </b:column>
+                    <!-- Row 3 -->
+                    <b:column span="4">
+                        <h:link outcome="dashboard">
+                            <h:graphicImage library="examples" class="thumbnail" name="dashboard.jpg"/>
+                        </h:link>
+                        <h4>Dashboard</h4>
+                        <p>Basic structure for an admin dashboard with fixed sidebar and navbar.</p>
+                    </b:column>
+                    <b:column span="4">
+                        <h:link outcome="signin">
+                            <h:graphicImage library="examples" class="thumbnail" name="sign-in.jpg"/>
+                        </h:link>
+                        <h4>Sign-in Page</h4>
+                        <p>Custom form layout and design for a simple sign in form.</p>
+                    </b:column>
+                    <b:column span="4">
+                        <h:link outcome="theme">
+                            <h:graphicImage library="examples" class="thumbnail" name="theme.jpg"/>
+                        </h:link>
+                        <h4>Bootstrap theme</h4>
+                        <p>Use the option to load the optional Bootstrap theme for a visually enhanced experience.</p>
+                    </b:column>
+                    
+                </b:row>
+                <h1>Demo Applications</h1>
+                <p>Coming Back soon.</p>
+                <hr/>
+                <b:row>
+                    <!-- Row 1
+                    <b:column span="4">
+                        <h:outputLink value="http://www.bootsfaces.net/AngularTetrisOnBootsFaces/">
+                            <h:graphicImage library="examples" class="thumbnail" name="ng-tetris-bsf.jpg"/>
+                        </h:outputLink>
+                        <h4>Tetris</h4>
+                        <p>Putting it all together: BootsFaces. AngularFaces. And a lot of fun. Source code available on <a target="_blank" href="https://github.com/stephanrauh/AngularTetrisOnBootsFaces">GitHub.</a></p>
+                    </b:column>
+                    <b:column span="4">#{' '}</b:column>
+                    <b:column span="4">#{' '}</b:column>
+                    -->
+                </b:row>
+                <br/><br/><br/>
+            </ui:define>
+        </ui:composition>

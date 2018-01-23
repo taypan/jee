@@ -97,7 +97,7 @@ public class UserResourceRESTService {
     public Response createUser(User user) {
 
         Response.ResponseBuilder builder = null;
-
+        System.out.println("creating user");
         try {
             // Validates user using bean validation
             validateUser(user);
@@ -108,14 +108,17 @@ public class UserResourceRESTService {
             builder = Response.ok();
         } catch (ConstraintViolationException ce) {
             // Handle bean validation issues
+            System.out.println("ConstraintViolationException");
             builder = createViolationResponse(ce.getConstraintViolations());
         } catch (ValidationException e) {
             // Handle the unique constrain violation
+            System.out.println("ValidationException");
             Map<String, String> responseObj = new HashMap<>();
             responseObj.put("email", "Email taken");
             builder = Response.status(Response.Status.CONFLICT).entity(responseObj);
         } catch (Exception e) {
             // Handle generic exceptions
+            System.out.println("Exception");
             Map<String, String> responseObj = new HashMap<>();
             responseObj.put("error", e.getMessage());
             builder = Response.status(Response.Status.BAD_REQUEST).entity(responseObj);
