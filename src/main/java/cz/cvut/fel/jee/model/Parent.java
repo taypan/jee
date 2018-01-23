@@ -1,19 +1,13 @@
-package cz.cvut.fel.jee.rest.model;
+package cz.cvut.fel.jee.model;
 
 import com.fasterxml.jackson.annotation.*;
-import cz.cvut.fel.jee.service.ParentAndChildService;
 
-import javax.ejb.Stateful;
-import javax.inject.Inject;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.persistence.*;
 import javax.persistence.GeneratedValue;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author Vaclav Rechtberger

@@ -1,4 +1,4 @@
-package cz.cvut.fel.jee.rest.model;
+package cz.cvut.fel.jee.model;
 
 import org.hibernate.validator.constraints.URL;
 

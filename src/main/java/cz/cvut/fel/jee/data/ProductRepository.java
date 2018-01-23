@@ -1,6 +1,6 @@
 package cz.cvut.fel.jee.data;
 
-import cz.cvut.fel.jee.rest.model.Product;
+import cz.cvut.fel.jee.model.Product;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

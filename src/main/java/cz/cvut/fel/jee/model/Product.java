@@ -1,7 +1,8 @@
-package cz.cvut.fel.jee.rest.model;
+package cz.cvut.fel.jee.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
 import javax.inject.Named;
 import javax.naming.InitialContext;
@@ -16,6 +17,7 @@ import java.io.Serializable;
 /**
  * @author Vaclav Rechtberger
  */
+@Data
 @Entity
 @Table(name="products")
 public class Product implements Serializable{
@@ -71,67 +73,4 @@ public class Product implements Serializable{
     public Product() {
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Gallery getGallery() {
-        return gallery;
-    }
-
-    public void setGallery(Gallery gallery) {
-        this.gallery = gallery;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getEAN() {
-        return EAN;
-    }
-
-    public void setEAN(String EAN) {
-        this.EAN = EAN;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
 }

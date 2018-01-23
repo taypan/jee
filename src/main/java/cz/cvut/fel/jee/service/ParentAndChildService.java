@@ -1,13 +1,11 @@
 package cz.cvut.fel.jee.service;
 
-import cz.cvut.fel.jee.rest.model.Child;
-import cz.cvut.fel.jee.rest.model.Parent;
-import cz.cvut.fel.jee.rest.model.Product;
+import cz.cvut.fel.jee.model.Child;
+import cz.cvut.fel.jee.model.Parent;
 
 import javax.ejb.Stateless;
 import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

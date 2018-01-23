@@ -1,24 +1,13 @@
 package cz.cvut.fel.jee.rest;
 
 import cz.cvut.fel.jee.data.ProductRepository;
-import cz.cvut.fel.jee.rest.model.Gallery;
 import cz.cvut.fel.jee.service.ProductService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Vaclav Rechtberger

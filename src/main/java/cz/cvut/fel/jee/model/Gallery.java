@@ -1,4 +1,4 @@
-package cz.cvut.fel.jee.rest.model;
+package cz.cvut.fel.jee.model;
 
 import lombok.Data;
 import lombok.Getter;
@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@Data
 @Entity
 @Table(name="galleries")
 public class Gallery {
@@ -25,27 +26,4 @@ public class Gallery {
     public Gallery() {
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getBase64() {
-        return base64;
-    }
-
-    public void setBase64(String base64) {
-        this.base64 = base64;
-    }
 }

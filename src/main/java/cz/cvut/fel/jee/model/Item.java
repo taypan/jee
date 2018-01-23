@@ -1,10 +1,10 @@
-package cz.cvut.fel.jee.rest.model;
+package cz.cvut.fel.jee.model;
 
 /**
  * @author Vaclav Rechtberger
  */
-public class Stock extends RestObject {
-    private String product;                 //product ID
+public class Item {
+    private String product;                    //ID ref
     private int amount;
 
     public String getProduct() {

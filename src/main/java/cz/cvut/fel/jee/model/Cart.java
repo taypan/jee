@@ -1,4 +1,4 @@
-package cz.cvut.fel.jee.rest.model;
+package cz.cvut.fel.jee.model;
 
 /**
  * @author Vaclav Rechtberger

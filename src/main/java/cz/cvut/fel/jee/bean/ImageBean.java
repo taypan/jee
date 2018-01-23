@@ -2,7 +2,6 @@ package cz.cvut.fel.jee.bean;
 
 
 import cz.cvut.fel.jee.data.GalleryRepository;
-import cz.cvut.fel.jee.rest.model.Gallery;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;

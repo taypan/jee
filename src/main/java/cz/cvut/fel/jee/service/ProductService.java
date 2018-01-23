@@ -1,14 +1,12 @@
 package cz.cvut.fel.jee.service;
 
 import cz.cvut.fel.jee.data.ProductRepository;
-import cz.cvut.fel.jee.model.User;
-import cz.cvut.fel.jee.rest.model.Product;
+import cz.cvut.fel.jee.model.Product;
 
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import java.util.logging.Logger;
 
 /**

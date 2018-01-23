@@ -16,7 +16,7 @@
  */
 package cz.cvut.fel.jee.data;
 
-import cz.cvut.fel.jee.rest.model.Product;
+import cz.cvut.fel.jee.model.Product;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -26,7 +26,6 @@ import javax.enterprise.inject.Produces;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Base64;
 import java.util.List;
 
 @ManagedBean(name = "product")
