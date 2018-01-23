@@ -14,6 +14,9 @@
                 border: 1px solid;
                 border-color: #428BCA;
             }
+            .red{
+                color: darkred;
+            }
         </style>
 
         <h1>Store</h1>
@@ -21,21 +24,25 @@
         <p>Eshop items.</p>
 
         <b:row>
+
+            <h:panelGroup rendered="#{empty product.products}">
+                <em>No products.</em>
+            </h:panelGroup>
+
             <!-- Here foreach with itemas -->
-            <b:column span="4">
-                <h:link outcome="starter_template">
-                    <h:graphicImage library="examples" class="thumbnail" name="starter-template.jpg"/>
-                </h:link>
-                <h4>Starter template</h4>
-                <p>Nothing but the basics: compiled CSS and JavaScript along with a container.</p>
-            </b:column>
-            <b:column span="4">
-                <h:link outcome="grid">
-                    <h:graphicImage library="examples" class="thumbnail" name="grid.jpg"/>
-                </h:link>
-                <h4>Grids</h4>
-                <p>Multiple examples of grid layouts with all four tiers, nesting, and more.</p>
-            </b:column>
+            <ui:repeat value="#{product.products}" var="item">
+
+                <b:column span="4">
+                    <h:link outcome="starter_template">
+                        <!--<h:graphicImage library="examples" class="thumbnail" name="starter-template.jpg"/>-->
+                        <h:graphicImage class="thumbnail" value="#{imageBean.getBase64(item.id)}" dataURI="true" />
+                    </h:link>
+                    <h4>#{item.name}</h4>
+                    <p>#{item.description}</p>
+                    <p class="red">#{item.price} Kč</p>
+                </b:column>
+
+            </ui:repeat>
 
         </b:row>
 

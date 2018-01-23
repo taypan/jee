@@ -16,6 +16,8 @@
  */
 package cz.cvut.fel.jee.data;
 
+import cz.cvut.fel.jee.rest.model.Product;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
@@ -24,33 +26,33 @@ import javax.enterprise.inject.Produces;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Base64;
 import java.util.List;
 
-import cz.cvut.fel.jee.model.User;
-
-@ManagedBean(name = "user")
+@ManagedBean(name = "product")
 @RequestScoped
-public class UserListProducer {
+public class ProductListProducer {
 
     @Inject
-    private UserRepository userRepository;
+    private ProductRepository productRepository;
 
-    private List<User> users;
+    private List<Product> products;
 
-    // @Named provides access the return value via the EL variable name "users" in the UI (e.g.
+    // @Named provides access the return value via the EL variable name "products" in the UI (e.g.
     // Facelets or JSP view)
     @Produces
     @Named
-    public List<User> getUsers() {
-        return users;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void onUserListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final User user) {
-        retrieveAllUsersOrderedByName();
+    public void onUserListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final Product product) {
+        retrieveAllProductsOrderedByName();
     }
 
     @PostConstruct
-    public void retrieveAllUsersOrderedByName() {
-        users = userRepository.findAllOrderedByName();
+    public void retrieveAllProductsOrderedByName() {
+        products = productRepository.findAll();
     }
+
 }

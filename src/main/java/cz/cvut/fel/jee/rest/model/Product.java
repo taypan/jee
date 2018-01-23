@@ -3,6 +3,7 @@ package cz.cvut.fel.jee.rest.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.inject.Named;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.persistence.*;
@@ -46,6 +47,7 @@ public class Product implements Serializable{
     private double price;
     @NotNull
     @OneToOne
+    @Named("gallery_id")
     private Gallery gallery;
 
     @JsonCreator

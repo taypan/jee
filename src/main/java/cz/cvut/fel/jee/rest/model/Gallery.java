@@ -1,14 +1,13 @@
 package cz.cvut.fel.jee.rest.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import lombok.Data;
+import lombok.Getter;
+import org.hibernate.validator.constraints.Length;
 
-/**
- * @author Vaclav Rechtberger
- */
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 @Entity
 @Table(name="galleries")
 public class Gallery {
@@ -18,6 +17,10 @@ public class Gallery {
 
     @NotNull
     private String name;
+
+    @NotNull
+    @Column(columnDefinition="TEXT")
+    private String base64;
 
     public Gallery() {
     }
@@ -36,5 +39,13 @@ public class Gallery {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getBase64() {
+        return base64;
+    }
+
+    public void setBase64(String base64) {
+        this.base64 = base64;
     }
 }
