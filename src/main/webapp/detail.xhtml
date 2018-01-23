@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<ui:composition template="/applayout/pageTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="content">
+        <h:outputStylesheet library="bsf" name="css/thumbnails.css"/>
+
+        <h1>Store</h1>
+
+        <p>Eshop items.</p>
+
+        <b:row>
+            <!-- Here foreach with itemas -->
+            <b:column span="4">
+                <h:link outcome="starter_template">
+                    <h:graphicImage library="examples" class="thumbnail" name="starter-template.jpg"/>
+                </h:link>
+                <h4>Starter template</h4>
+                <p>Nothing but the basics: compiled CSS and JavaScript along with a container.</p>
+            </b:column>
+
+        </b:row>
+
+        <br/><br/><br/>
+    </ui:define>
+</ui:composition>
