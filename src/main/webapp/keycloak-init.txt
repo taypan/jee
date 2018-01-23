@@ -1,0 +1,25 @@
+1. Keycloak Server
+    * download jee/keycloak/keycloak-3.4.0.Final and put to the same folder, as wildfly server
+    * run ./bin/standalone.sh -Djboss.socket.binding.port-offset=100
+        * this will start instance of keycloak server at port 8180 (= 8080 + 100)
+2. Keycloak Adapter
+    * download jee/keycloak/keycloak-wildfly-adapter-dist-3.4.0.Final
+        file into the root directory of your WildFly distribution
+    * finish installation with: (from wildfly)
+    *      ./bin/jboss-cli.sh --file=adapter-install-offline.cli
+    * previous command will do necessary changes to WildFly config file
+        and we can start the server using ./bin/standalone.sh
+3. Deploy app to wildfly
+-- Be sure that keycloak server is running on port 8180
+5. Go to localhost:8080/eshop/keycloak-intro.xhtml -> this site (when the user is not logged in)
+    will open the default keycloak login form.
+6. Insert predefined credentials:
+username: test1
+password: test1
+
+
+X. The credentials to the admin console are
+username: admin
+password: admin
+
+
