@@ -8,9 +8,9 @@
     <ui:define name="content">
         <h:outputStylesheet library="bsf" name="css/thumbnails.css"/>
 
-        <h1>Store</h1>
+        <ui:param name="item" value="#{productBean.getItemDetail(param.product_id)}" />
 
-        <p>Eshop items.</p>
+        <h1>#{item.name}</h1>
 
         <b:row>
             <!-- Here foreach with itemas -->
@@ -24,6 +24,9 @@
 
         </b:row>
 
-        <br/><br/><br/>
+        <!-- Here buy item -->
+
+
+
     </ui:define>
 </ui:composition>
