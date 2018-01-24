@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
@@ -43,6 +44,7 @@ import javax.ws.rs.core.Response;
 import cz.cvut.fel.jee.data.UserRepository;
 import cz.cvut.fel.jee.model.User;
 import cz.cvut.fel.jee.service.UserRegistration;
+import org.jboss.ejb3.annotation.SecurityDomain;
 
 /**
  * JAX-RS Example
@@ -51,6 +53,7 @@ import cz.cvut.fel.jee.service.UserRegistration;
  */
 @Path("/users")
 @RequestScoped
+@SecurityDomain("keycloak")
 public class UserResourceRESTService {
 
     @Inject
@@ -67,6 +70,7 @@ public class UserResourceRESTService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("user")
     public List<User> listAllUsers() {
         return repository.findAllOrderedByName();
     }
@@ -74,6 +78,7 @@ public class UserResourceRESTService {
     @GET
     @Path("/{id:[0-9][0-9]*}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("user")
     public User lookupUserById(@PathParam("id") long id) {
         User user = repository.findById(id);
         if (user == null) {
