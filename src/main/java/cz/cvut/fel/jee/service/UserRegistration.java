@@ -38,7 +38,7 @@ public class UserRegistration {
     private Event<User> userEventSrc;
 
     public void register(User user) throws Exception {
-        log.info("Registering " + user.getName());
+        log.info("Registering " + user.getEmail());
         em.persist(user);
         userEventSrc.fire(user);
     }

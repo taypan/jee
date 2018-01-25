@@ -55,12 +55,11 @@ public class UserRegistrationTest {
     @Test
     public void testRegister() throws Exception {
         User newUser = new User();
-        newUser.setName("Jane Doe");
         newUser.setEmail("jane@mailinator.com");
-        newUser.setPhoneNumber("2125551234");
+        newUser.setPassword("2125551234");
         userRegistration.register(newUser);
         assertNotNull(newUser.getId());
-        log.info(newUser.getName() + " was persisted with id " + newUser.getId());
+        log.info(newUser.getEmail() + " was persisted with id " + newUser.getId());
     }
 
 }

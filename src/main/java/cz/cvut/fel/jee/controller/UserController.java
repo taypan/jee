@@ -49,7 +49,7 @@ public class UserController {
         newUser = new User();
     }
 
-    public void register() throws Exception {
+    public void register() {
         try {
             userRegistration.register(newUser);
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
