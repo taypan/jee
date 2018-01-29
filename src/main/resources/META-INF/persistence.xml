@@ -33,6 +33,7 @@
          <!-- VASEK - EM JNDI -->
          <property name="jboss.entity.manager.jndi.name" value="java:/defaultEntityManager"/>
          <property name="jboss.entity.manager.factory.jndi.name" value="java:/defaultEntityManagerFactory"/>
+          <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
       </properties>
    </persistence-unit>
 </persistence>
