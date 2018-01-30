@@ -1,18 +1,16 @@
 package cz.cvut.fel.jee.bean;
 
 import lombok.Data;
+import org.keycloak.AuthorizationContext;
+import org.keycloak.KeycloakPrincipal;
+import org.keycloak.KeycloakSecurityContext;
 
-import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
-
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 
 @Data
@@ -46,8 +44,21 @@ public class LoginBean {
 
     public String loggedUser(){
         HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();
-        Principal principal = request.getUserPrincipal();
-        return principal==null ? "NOT LOGGED IN" : principal.getName();
+
+        try {
+            KeycloakPrincipal principal = (KeycloakPrincipal) request.getUserPrincipal();
+            KeycloakSecurityContext con = (KeycloakSecurityContext) request.getSession().getAttribute(KeycloakSecurityContext.class.getName());
+            System.out.println(con.getToken().getName());
+            System.out.println(con.getToken().getEmail());
+            System.out.println(con.getToken().getPreferredUsername());
+            System.out.println(con.getToken().getRealmAccess().getRoles());
+
+            return principal==null ? "NOT LOGGED IN" : principal.getName();
+        }
+        catch (Exception e) {
+            return "NOT LOGGED IN";
+        }
+
     }
 
 }

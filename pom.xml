@@ -246,6 +246,11 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-core</artifactId>
+            <version>3.4.0.Final</version>
+        </dependency>
 
     </dependencies>
 
