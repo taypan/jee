@@ -19,4 +19,5 @@ public class ImageBean {
         return galleryRepository.findById(imageId).getBase64();
     }
 
+
 }
