@@ -24,6 +24,7 @@ import javax.inject.Inject;
 
 import cz.cvut.fel.jee.model.User;
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import cz.cvut.fel.jee.service.UserRegistration;
 import cz.cvut.fel.jee.util.Resources;
@@ -47,10 +48,10 @@ public class UserRegistrationTest {
     }
 
     @Inject
-    UserRegistration userRegistration;
+    private UserRegistration userRegistration;
 
     @Inject
-    Logger log;
+    private Logger log;
 
     @Test
     public void testRegister() throws Exception {

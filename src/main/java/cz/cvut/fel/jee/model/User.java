@@ -51,7 +51,6 @@ public class User implements Serializable {
 
     @NotNull
     @NotEmpty
-    @Email
     private String password;
 
     //todo add roles
