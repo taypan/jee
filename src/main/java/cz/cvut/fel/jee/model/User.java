@@ -17,6 +17,8 @@
 package cz.cvut.fel.jee.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,6 +32,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -40,9 +43,22 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"), schema = "public")
 public class User implements Serializable {
 
+    public User(){}
+
+    public User(String name, String email, String username, HashSet<String> roles) {
+        this.name = name;
+        this.email = email;
+        this.username = username;
+        this.roles = roles;
+    }
+
     @Id
     @GeneratedValue
     private Long id;
+
+    @NotNull
+    @NotEmpty
+    private String name;
 
     @NotNull
     @NotEmpty
@@ -51,8 +67,8 @@ public class User implements Serializable {
 
     @NotNull
     @NotEmpty
-    private String password;
+    private String username;
 
-    //todo add roles
+    private HashSet<String> roles;
 
 }

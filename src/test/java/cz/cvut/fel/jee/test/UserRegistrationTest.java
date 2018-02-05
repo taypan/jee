@@ -18,6 +18,7 @@ package cz.cvut.fel.jee.test;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.HashSet;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
@@ -55,9 +56,7 @@ public class UserRegistrationTest {
 
     @Test
     public void testRegister() throws Exception {
-        User newUser = new User();
-        newUser.setEmail("jane@mailinator.com");
-        newUser.setPassword("2125551234");
+        User newUser = new User("name", "email@email.com", "username", new HashSet<>());
         userRegistration.register(newUser);
         assertNotNull(newUser.getId());
         log.info(newUser.getEmail() + " was persisted with id " + newUser.getId());

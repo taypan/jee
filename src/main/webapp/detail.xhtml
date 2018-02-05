@@ -10,21 +10,20 @@
 
         <ui:param name="item" value="#{productBean.getItemDetail(param.product_id)}" />
 
-        <h1>#{item.name}</h1>
+        <h1>Detail - #{item.name}</h1>
 
         <b:row>
             <!-- Here foreach with itemas -->
             <b:column span="4">
                 <h:link outcome="starter_template">
-                    <h:graphicImage library="examples" class="thumbnail" name="starter-template.jpg"/>
+                    <h:graphicImage class="thumbnail" value="#{imageBean.getBase64(item.id)}" dataURI="true" />
                 </h:link>
-                <h4>Starter template</h4>
-                <p>Nothing but the basics: compiled CSS and JavaScript along with a container.</p>
+                <h4>#{item.price} Kc</h4>
+                <p>#{item.description}</p>
+                <p>Koupit</p>
             </b:column>
 
         </b:row>
-
-        <!-- Here buy item -->
 
 
 
