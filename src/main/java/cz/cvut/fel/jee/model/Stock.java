@@ -3,6 +3,7 @@ package cz.cvut.fel.jee.model;
 /**
  * @author Vaclav Rechtberger
  */
+//TODO Have to be implemented to the product
 public class Stock extends RestObject {
     private String product;                 //product ID
     private int amount;

@@ -69,6 +69,7 @@ public class User implements Serializable {
     @NotEmpty
     private String username;
 
+    //TODO link keycloak roles to this user
     private HashSet<String> roles;
 
 }
