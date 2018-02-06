@@ -2,6 +2,7 @@ package cz.cvut.fel.jee.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.inject.Named;
@@ -14,9 +15,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
-/**
- * @author Vaclav Rechtberger
- */
 @Data
 @Entity
 @Table(name="products")
@@ -49,7 +47,6 @@ public class Product implements Serializable{
     @Named("gallery_id")
     private Gallery gallery;
 
-    //TODO do we need manufacturer?
     @JsonCreator
     public Product(@JsonProperty("name") String name,
                    @JsonProperty("description") String description,

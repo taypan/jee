@@ -1,6 +1,7 @@
 package cz.cvut.fel.jee.model;
 
 import com.fasterxml.jackson.annotation.*;
+import lombok.Data;
 
 import javax.inject.Named;
 import javax.naming.InitialContext;
@@ -10,9 +11,7 @@ import java.io.Serializable;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * @author Vaclav Rechtberger
- */
+@Data
 @Entity
 @Table(name="shoppingcarts")
 public class ShoppingCart implements Serializable, Identifiable {
@@ -49,29 +48,4 @@ public class ShoppingCart implements Serializable, Identifiable {
     public ShoppingCart() {
     }
 
-    @Override
-    public long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    public Set<LineItem> getItems() {
-        return items;
-    }
-
-    public void setItems(Set<LineItem> items) {
-        this.items = items;
-    }
 }

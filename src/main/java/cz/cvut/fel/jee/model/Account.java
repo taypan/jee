@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -37,6 +38,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @XmlRootElement
 @Table(name = "account")
+@AllArgsConstructor
+@EqualsAndHashCode
 public class Account implements Serializable {
 
     @Id

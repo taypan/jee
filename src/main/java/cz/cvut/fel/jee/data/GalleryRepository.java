@@ -17,7 +17,9 @@
 package cz.cvut.fel.jee.data;
 
 import cz.cvut.fel.jee.model.Gallery;
+import cz.cvut.fel.jee.model.Product;
 
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -30,6 +32,10 @@ public class GalleryRepository {
 
     public Gallery findById(Long id) {
         return em.find(Gallery.class, id);
+    }
+
+    public void create(Gallery gallery) {
+        em.persist(gallery);
     }
 
 }

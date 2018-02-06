@@ -22,9 +22,6 @@ public class ProductRepository {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Product> criteria = cb.createQuery(Product.class);
         Root<Product> productRoot = criteria.from(Product.class);
-        // Swap criteria statements if you would like to try out type-safe criteria queries, a new
-        // feature in JPA 2.0
-        // criteria.select(member).orderBy(cb.asc(member.get(Member_.name)));
         criteria.select(productRoot);
         return em.createQuery(criteria).getResultList();
     }
@@ -32,4 +29,9 @@ public class ProductRepository {
     public Product findById(Long id) {
         return em.find(Product.class, id);
     }
+
+    public void create(Product product) {
+        em.persist(product);
+    }
+
 }

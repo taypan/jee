@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.naming.NamingException;
 
+//TODO pak predelat na vaskovi classy
 @Named
 @ApplicationScoped
 public class ShoppingCartBean {
@@ -20,14 +21,20 @@ public class ShoppingCartBean {
     private LineItemRepository lineItemRepository;
 
     @Inject
+    private LoginBean loginBean;
+
+    @Inject
     private ShoppingCartRepository shoppingCartRepository;
 
     public void deleteItemFromShoppingCart(){
 
     }
 
-    public void addItemToShoppingCart(long itemId, int amount) throws NamingException {
-        LineItem lineItem = new LineItem(amount, itemId);
+    public void addItemToShoppingCart(long productId, int amount) throws NamingException {
+        shoppingCartRepository.addItem(
+                loginBean.loggedAccount(),
+                new LineItem(amount, productId)
+        );
     }
 
 }
