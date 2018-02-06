@@ -43,7 +43,7 @@ import javax.ws.rs.core.Response;
 
 import cz.cvut.fel.jee.data.UserRepository;
 import cz.cvut.fel.jee.model.Account;
-import cz.cvut.fel.jee.service.UserRegistration;
+import cz.cvut.fel.jee.service.AccountRegistration;
 import org.jboss.ejb3.annotation.SecurityDomain;
 
 /**
@@ -66,7 +66,7 @@ public class UserResourceRESTService {
     private UserRepository repository;
 
     @Inject
-    UserRegistration registration;
+    AccountRegistration registration;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)

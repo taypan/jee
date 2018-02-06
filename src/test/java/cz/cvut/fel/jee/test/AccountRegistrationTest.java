@@ -24,9 +24,10 @@ import java.util.logging.Logger;
 import javax.inject.Inject;
 
 import cz.cvut.fel.jee.model.Account;
+import cz.cvut.fel.jee.model.Role;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import cz.cvut.fel.jee.service.UserRegistration;
+import cz.cvut.fel.jee.service.AccountRegistration;
 import cz.cvut.fel.jee.util.Resources;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -40,15 +41,14 @@ public class AccountRegistrationTest {
     @Deployment
     public static Archive<?> createTestArchive() {
         return ShrinkWrap.create(WebArchive.class, "test.war")
-                .addClasses(Account.class, UserRegistration.class, Resources.class)
+                .addPackages(true, "cz.cvut.fel.jee")
                 .addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
-                // Deploy our test datasource
                 .addAsWebInfResource("test-ds.xml");
     }
 
     @Inject
-    private UserRegistration userRegistration;
+    private AccountRegistration accountRegistration;
 
     @Inject
     private Logger log;
@@ -56,7 +56,7 @@ public class AccountRegistrationTest {
     @Test
     public void testRegister() throws Exception {
         Account newAccount = new Account("username", "fullname", new HashSet<>());
-        userRegistration.register(newAccount);
+        accountRegistration.register(newAccount);
         assertNotNull(newAccount.getId());
         log.info(newAccount.getUsername() + " was persisted with id " + newAccount.getId());
     }
