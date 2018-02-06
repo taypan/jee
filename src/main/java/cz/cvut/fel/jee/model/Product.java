@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table(name="products")
-public class Product implements Serializable{
+public class Product implements Serializable, Identifiable {
 
     @Id @GeneratedValue
     private long id;
