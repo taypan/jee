@@ -30,7 +30,6 @@ public class AccountRESTService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createDefault(){
         Account account = new Account();
-        account.setFullName("Petr Novak");
         account.setUsername("user1");
         Set<Role> roles = new HashSet<>();
         roles.add(Role.ADMIN);

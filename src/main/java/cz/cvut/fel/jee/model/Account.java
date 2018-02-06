@@ -37,7 +37,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @XmlRootElement
 @Table(name = "account")
-public class Account implements Serializable {
+public class Account implements Serializable, Identifiable {
 
     @Id
     @GeneratedValue
@@ -49,6 +49,12 @@ public class Account implements Serializable {
     @NotNull
     private String fullName;
 
+    @NotNull
+    private String salt;
+
+    @NotNull
+    private String passwordHash;
+
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
@@ -59,5 +65,15 @@ public class Account implements Serializable {
         this.username = username;
         this.fullName = fullName;
         this.roles = roles;
+    }
+
+    @Override
+    public long getId() {
+        return 0;
+    }
+
+    @Override
+    public void setId(long id) {
+
     }
 }
