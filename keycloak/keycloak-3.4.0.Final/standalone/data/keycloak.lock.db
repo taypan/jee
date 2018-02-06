@@ -1,0 +1,6 @@
+#FileLock
+#Tue Feb 06 12:19:17 CET 2018
+hostName=ricpic-machine
+id=1616a6e541a2dfaf38dad7ff82c652e202b1c2253e1
+method=file
+server=127.0.1.1\:42697
