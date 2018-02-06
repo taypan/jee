@@ -7,6 +7,7 @@ import cz.cvut.fel.jee.service.LineItemService;
 import cz.cvut.fel.jee.service.OrderQueueService;
 import cz.cvut.fel.jee.service.OrderService;
 import cz.cvut.fel.jee.util.PasswordEncryptionService;
+import cz.cvut.fel.jee.validation.anotations.ValidOrder;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -76,7 +77,7 @@ public class OrderRESTService {
     @Path("/{id:[0-9]+}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response update(Order order, @PathParam("id") long id) {
+    public Response update(@ValidOrder  Order order, @PathParam("id") long id) {
         try{
             order.setId(id);
             orderService.update(order);
@@ -91,7 +92,7 @@ public class OrderRESTService {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(Order order) {
+    public Response create(@ValidOrder Order order) {
         try{
             orderService.create(order);
             orderQueueService.sendMessage(""+order.getId());
