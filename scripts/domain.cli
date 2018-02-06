@@ -49,7 +49,7 @@ end-if
 
 
 # Add a non-XA datasource
-/profile=default/subsystem=datasources/data-source=$DATASOURCE:add(jndi-name="java:jboss/datasources/eshopDS",  driver-name=postgresql,  connection-url="jdbc:postgresql://localhost:5432/postgres", user-name="sa", password="sa", enabled=true, use-java-context=true )
+/profile=default/subsystem=datasources/data-source=$DATASOURCE:add(jndi-name="java:jboss/datasources/eshopDS",  driver-name=postgresql,  connection-url="jdbc:postgresql://localhost:5432/postgres", account-name="sa", password="sa", enabled=true, use-java-context=true )
 
 
 # Add server group "$SERVER_GROUP"

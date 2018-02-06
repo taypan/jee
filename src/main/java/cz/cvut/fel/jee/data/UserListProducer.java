@@ -26,7 +26,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 
-import cz.cvut.fel.jee.model.User;
+import cz.cvut.fel.jee.model.Account;
 
 @ManagedBean(name = "user")
 @RequestScoped
@@ -35,22 +35,22 @@ public class UserListProducer {
     @Inject
     private UserRepository userRepository;
 
-    private List<User> users;
+    private List<Account> accounts;
 
-    // @Named provides access the return value via the EL variable name "users" in the UI (e.g.
+    // @Named provides access the return value via the EL variable name "accounts" in the UI (e.g.
     // Facelets or JSP view)
     @Produces
     @Named
-    public List<User> getUsers() {
-        return users;
+    public List<Account> getAccounts() {
+        return accounts;
     }
 
-    public void onUserListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final User user) {
+    public void onUserListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final Account account) {
         retrieveAllUsersOrderedByName();
     }
 
     @PostConstruct
     public void retrieveAllUsersOrderedByName() {
-        users = userRepository.findAllOrderedByName();
+        accounts = userRepository.findAllOrderedByName();
     }
 }

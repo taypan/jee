@@ -16,7 +16,7 @@
  */
 package cz.cvut.fel.jee.service;
 
-import cz.cvut.fel.jee.model.User;
+import cz.cvut.fel.jee.model.Account;
 
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
@@ -35,11 +35,11 @@ public class UserRegistration {
     private EntityManager em;
 
     @Inject
-    private Event<User> userEventSrc;
+    private Event<Account> userEventSrc;
 
-    public void register(User user) throws Exception {
-        log.info("Registering " + user.getEmail());
-        em.persist(user);
-        userEventSrc.fire(user);
+    public void register(Account account) throws Exception {
+        log.info("Registering " + account.getFullName());
+        em.persist(account);
+        userEventSrc.fire(account);
     }
 }

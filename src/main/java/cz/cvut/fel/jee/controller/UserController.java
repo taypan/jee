@@ -24,7 +24,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import cz.cvut.fel.jee.model.User;
+import cz.cvut.fel.jee.model.Account;
 import cz.cvut.fel.jee.service.UserRegistration;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
@@ -42,16 +42,16 @@ public class UserController {
 
     @Produces
     @Named
-    private User newUser;
+    private Account newAccount;
 
     @PostConstruct
     public void initNewUser() {
-        newUser = new User();
+        newAccount = new Account();
     }
 
     public void register() {
         try {
-            userRegistration.register(newUser);
+            userRegistration.register(newAccount);
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
             facesContext.addMessage(null, m);
             initNewUser();

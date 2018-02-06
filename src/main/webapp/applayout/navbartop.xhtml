@@ -21,10 +21,10 @@
             </b:navbarLinks>
 
             <b:navbarLinks pull="right">
-                <b:dropMenu value="${loginBean.loggedUser().username}" iconAwesome="user" >
+                <b:dropMenu value="${loginBean.loggedAccount().username}" iconAwesome="account" >
                     <b:navLink>
                         <h:form>
-                            <h:commandLink action="#{loginBean.logout}" value="Logout" iconAwesome="user" />
+                            <h:commandLink action="#{loginBean.logout}" value="Logout" iconAwesome="account" />
                         </h:form>
                     </b:navLink>
                 </b:dropMenu>

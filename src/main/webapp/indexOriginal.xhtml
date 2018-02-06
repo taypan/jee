@@ -36,16 +36,16 @@
                 model class.</p>
             <h:panelGrid columns="3" columnClasses="titleCell">
                 <h:outputLabel for="name" value="Name:" />
-                <h:inputText id="name" value="#{newUser.name}" />
+                <h:inputText id="name" value="#{newAccount.name}" />
                 <h:message for="name" errorClass="invalid" />
 
                 <h:outputLabel for="email" value="Email:" />
-                <h:inputText id="email" value="#{newUser.email}" />
+                <h:inputText id="email" value="#{newAccount.email}" />
                 <h:message for="email" errorClass="invalid" />
 
                 <h:outputLabel for="phoneNumber" value="Phone #:" />
                 <h:inputText id="phoneNumber"
-                    value="#{newUser.phoneNumber}" />
+                    value="#{newAccount.phoneNumber}" />
                 <h:message for="phoneNumber" errorClass="invalid" />
             </h:panelGrid>
 
@@ -61,11 +61,11 @@
             </p>
         </h:form>
         <h2>Users</h2>
-        <h:panelGroup rendered="#{empty users}">
+        <h:panelGroup rendered="#{empty getAccounts}">
             <em>No registered users.</em>
         </h:panelGroup>
-        <h:dataTable var="_user" value="#{users}"
-            rendered="#{not empty users}"
+        <h:dataTable var="_user" value="#{getAccounts}"
+            rendered="#{not empty getAccounts}"
             styleClass="simpletablestyle">
             <h:column>
                 <f:facet name="header">Id</f:facet>

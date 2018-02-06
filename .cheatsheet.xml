@@ -34,7 +34,7 @@ JAX-RS is an update specification for Java EE 7. It allows application developer
         title="The eshop example in depth">
      <description>
        The eshop application shows off a number of Java EE technologies such as CDI, JSF, EJB, JTA, JAX-RS and Arquillian. 
-       It does this by providing a user registration database, available via JSF and JAX-RS.
+       It does this by providing a account registration database, available via JSF and JAX-RS.
 <br/><br/>
 As usual, let&apos;s start by looking at the necessary deployment descriptors. 
 By now, we're very used to seeing <b>beans.xml</b> and <b>faces-config.xml</b> in <b>WEB-INF/</b> 
@@ -55,7 +55,7 @@ We discussed both of these files in detail in The <b>greeter example in depth</b
    <item
          title="default.xhtml">
       <description>
-      Next, let&apos;s take a look at the JSF view the user sees. As usual, we use a template to provide the sidebar and footer. This one lives in <b>WEB-INF/templates/default.xhtml</b>:
+      Next, let&apos;s take a look at the JSF view the account sees. As usual, we use a template to provide the sidebar and footer. This one lives in <b>WEB-INF/templates/default.xhtml</b>:
       </description>
       <subitem
             label="We have a common &lt;head&gt; element, where we define styles and more. "
@@ -125,7 +125,7 @@ We discussed both of these files in detail in The <b>greeter example in depth</b
       serialization="org.jboss.tools.project.examples.cheatsheet.openFileInEditor(path=/${currentProject}/src/main/webapp/index.xhtml,fromLine=47,toLine=49)"/>
     </subitem>
     <subitem
-            label="This application exposes REST endpoints for each registered user. The application helpfully displays the URL to the REST endpoint on this page. "
+            label="This application exposes REST endpoints for each registered account. The application helpfully displays the URL to the REST endpoint on this page. "
             skip="true">
     <command
       required="false"
@@ -199,7 +199,7 @@ We discussed both of these files in detail in The <b>greeter example in depth</b
       serialization="org.jboss.tools.project.examples.cheatsheet.openFileInEditor(path=/${currentProject}/src/main/java/cz/cvut/fel/jee/data/MemberRepository.java,fromLine=32)"/>
   </subitem>
   <subitem
-            label="The JPA criteria api is used to load a user by his or her unique identifier, email address."
+            label="The JPA criteria api is used to load a account by his or her unique identifier, email address."
             skip="true">
     <command
       required="false"
@@ -244,7 +244,7 @@ We discussed both of these files in detail in The <b>greeter example in depth</b
       serialization="org.jboss.tools.project.examples.cheatsheet.openFileInEditor(path=/${currentProject}/src/main/java/cz/cvut/fel/jee/data/MemberListProducer.java,fromLine=40,toLine=41)"/>
   </subitem>
   <subitem
-            label="The observer method is notified whenever a user is created, removed, or updated. This allows us to refresh the list of members whenever they are needed. This is a good approach as it allows us to cache the list of members, but keep it up to date at the same time."
+            label="The observer method is notified whenever a account is created, removed, or updated. This allows us to refresh the list of members whenever they are needed. This is a good approach as it allows us to cache the list of members, but keep it up to date at the same time."
             skip="true">
     <command
       required="false"
@@ -274,7 +274,7 @@ We discussed both of these files in detail in The <b>greeter example in depth</b
       serialization="org.jboss.tools.project.examples.cheatsheet.openFileInEditor(path=/${currentProject}/src/main/java/cz/cvut/fel/jee/service/MemberRegistration.java,fromLine=31)"/>
   </subitem>
   <subitem
-            label="An event is sent every time a user is updated. This allows other pieces of code (in this quickstart the user list is refreshed) to react to changes in the user list without any coupling to this class. "
+            label="An event is sent every time a account is updated. This allows other pieces of code (in this quickstart the account list is refreshed) to react to changes in the account list without any coupling to this class. "
             skip="true">
     <command
       required="false"
@@ -333,7 +333,7 @@ We discussed both of these files in detail in The <b>greeter example in depth</b
       serialization="org.jboss.tools.project.examples.cheatsheet.openFileInEditor(path=/${currentProject}/src/main/java/cz/cvut/fel/jee/controller/MemberController.java,fromLine=34)"/>
   </subitem>
   <subitem
-            label="The FacesContext is injected, so that messages can be sent to the user."
+            label="The FacesContext is injected, so that messages can be sent to the account."
             skip="true">
     <command
       required="false"
@@ -354,28 +354,28 @@ We discussed both of these files in detail in The <b>greeter example in depth</b
       serialization="org.jboss.tools.project.examples.cheatsheet.openFileInEditor(path=/${currentProject}/src/main/java/cz/cvut/fel/jee/controller/MemberController.java,fromLine=43,toLine=45)"/>
   </subitem>
   <subitem
-            label="The @PostConstruct annotation causes a new user object to be placed in the newUser field when the bean is instantiated."
+            label="The @PostConstruct annotation causes a new account object to be placed in the newAccount field when the bean is instantiated."
             skip="true">
     <command
       required="false"
       serialization="org.jboss.tools.project.examples.cheatsheet.openFileInEditor(path=/${currentProject}/src/main/java/cz/cvut/fel/jee/controller/MemberController.java,fromLine=47)"/>
   </subitem>
   <subitem
-            label="When the register method is called, the newUser object is passed to the persistence service."
+            label="When the register method is called, the newAccount object is passed to the persistence service."
             skip="true">
     <command
       required="false"
       serialization="org.jboss.tools.project.examples.cheatsheet.openFileInEditor(path=/${currentProject}/src/main/java/cz/cvut/fel/jee/controller/MemberController.java,fromLine=54)"/>
   </subitem>
   <subitem
-            label="We also send a message to the user, to give them feedback on their actions."
+            label="We also send a message to the account, to give them feedback on their actions."
             skip="true">
     <command
       required="false"
       serialization="org.jboss.tools.project.examples.cheatsheet.openFileInEditor(path=/${currentProject}/src/main/java/cz/cvut/fel/jee/controller/MemberController.java,fromLine=56)"/>
   </subitem>
   <subitem
-            label="Finally, we replace the newUser with a new object, thus blanking out the data the user has added so far. This works as the producer field is dependent scoped."
+            label="Finally, we replace the newAccount with a new object, thus blanking out the data the account has added so far. This works as the producer field is dependent scoped."
             skip="true">
     <command
       required="false"
@@ -431,21 +431,21 @@ We discussed both of these files in detail in The <b>greeter example in depth</b
       serialization="org.jboss.tools.project.examples.cheatsheet.openFileInEditor(path=/${currentProject}/src/main/java/cz/cvut/fel/jee/rest/MemberResourceRESTService.java,fromLine=56)"/>
   </subitem>
   <subitem
-            label="CDI allows us to inject a Bean Validation Validator instance, which is used to validate the POSTed user before it is persisted."
+            label="CDI allows us to inject a Bean Validation Validator instance, which is used to validate the POSTed account before it is persisted."
             skip="true">
     <command
       required="false"
       serialization="org.jboss.tools.project.examples.cheatsheet.openFileInEditor(path=/${currentProject}/src/main/java/cz/cvut/fel/jee/rest/MemberResourceRESTService.java,fromLine=59)"/>
   </subitem>
   <subitem
-            label="MemberRepository is injected to allow us to query the user database "
+            label="MemberRepository is injected to allow us to query the account database "
             skip="true">
     <command
       required="false"
       serialization="org.jboss.tools.project.examples.cheatsheet.openFileInEditor(path=/${currentProject}/src/main/java/cz/cvut/fel/jee/rest/MemberResourceRESTService.java,fromLine=62)"/>
   </subitem>
   <subitem
-            label="MemberRegistration is injected to allow us to alter the user database."
+            label="MemberRegistration is injected to allow us to alter the account database."
             skip="true">
     <command
       required="false"
@@ -459,7 +459,7 @@ We discussed both of these files in detail in The <b>greeter example in depth</b
       serialization="org.jboss.tools.project.examples.cheatsheet.openFileInEditor(path=/${currentProject}/src/main/java/cz/cvut/fel/jee/rest/MemberResourceRESTService.java,fromLine=68,toLine=72)"/>
   </subitem>
   <subitem
-            label="The lookupMemberById() method is called when the endpoint is accessed with a user id parameter appended (for example rest/members/1). Again, the object is automatically marshalled to JSON by RESTEasy."
+            label="The lookupMemberById() method is called when the endpoint is accessed with a account id parameter appended (for example rest/members/1). Again, the object is automatically marshalled to JSON by RESTEasy."
             skip="true">
     <command
       required="false"
@@ -473,7 +473,7 @@ We discussed both of these files in detail in The <b>greeter example in depth</b
       serialization="org.jboss.tools.project.examples.cheatsheet.openFileInEditor(path=/${currentProject}/src/main/java/cz/cvut/fel/jee/rest/MemberResourceRESTService.java,fromLine=89,toLine=120)"/>
   </subitem>
   <subitem
-            label="In order to ensure that the user is valid, we call the validateMember method, which validates the object, and adds any constraint violations to the response. These can then be handled on the client side, and displayed to the user."
+            label="In order to ensure that the account is valid, we call the validateMember method, which validates the object, and adds any constraint violations to the response. These can then be handled on the client side, and displayed to the account."
             skip="true">
     <command
       required="false"
@@ -610,7 +610,7 @@ We discussed both of these files in detail in The <b>greeter example in depth</b
       serialization="org.jboss.tools.project.examples.cheatsheet.openFileInEditor(path=/${currentProject}/src/test/java/cz/cvut/fel/jee/test/MemberRegistrationTest.java,fromLine=49,toLine=50)"/>
   </subitem>
   <subitem
-            label="The test method works as you would expect - creates a new user, registers them, and then verifies that the user was created "
+            label="The test method works as you would expect - creates a new account, registers them, and then verifies that the account was created "
             skip="true">
     <command
       required="false"

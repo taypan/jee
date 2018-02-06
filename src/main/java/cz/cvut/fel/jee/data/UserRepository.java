@@ -24,7 +24,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-import cz.cvut.fel.jee.model.User;
+import cz.cvut.fel.jee.model.Account;
 
 @ApplicationScoped
 public class UserRepository {
@@ -32,14 +32,14 @@ public class UserRepository {
     @Inject
     private EntityManager em;
 
-    public User findById(Long id) {
-        return em.find(User.class, id);
+    public Account findById(Long id) {
+        return em.find(Account.class, id);
     }
 
-    public User findByEmail(String email) {
+    public Account findByEmail(String email) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<User> criteria = cb.createQuery(User.class);
-        Root<User> member = criteria.from(User.class);
+        CriteriaQuery<Account> criteria = cb.createQuery(Account.class);
+        Root<Account> member = criteria.from(Account.class);
         // Swap criteria statements if you would like to try out type-safe criteria queries, a new
         // feature in JPA 2.0
         // criteria.select(member).where(cb.equal(member.get(Member_.name), email));
@@ -47,10 +47,10 @@ public class UserRepository {
         return em.createQuery(criteria).getSingleResult();
     }
 
-    public List<User> findAllOrderedByName() {
+    public List<Account> findAllOrderedByName() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<User> criteria = cb.createQuery(User.class);
-        Root<User> member = criteria.from(User.class);
+        CriteriaQuery<Account> criteria = cb.createQuery(Account.class);
+        Root<Account> member = criteria.from(Account.class);
         // Swap criteria statements if you would like to try out type-safe criteria queries, a new
         // feature in JPA 2.0
         // criteria.select(member).orderBy(cb.asc(member.get(Member_.name)));

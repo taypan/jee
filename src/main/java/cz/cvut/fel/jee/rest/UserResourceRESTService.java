@@ -42,7 +42,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import cz.cvut.fel.jee.data.UserRepository;
-import cz.cvut.fel.jee.model.User;
+import cz.cvut.fel.jee.model.Account;
 import cz.cvut.fel.jee.service.UserRegistration;
 import org.jboss.ejb3.annotation.SecurityDomain;
 
@@ -71,7 +71,7 @@ public class UserResourceRESTService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed("user")
-    public List<User> listAllUsers() {
+    public List<Account> listAllUsers() {
         return repository.findAllOrderedByName();
     }
 
@@ -79,30 +79,30 @@ public class UserResourceRESTService {
     @Path("/{id:[0-9][0-9]*}")
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed("user")
-    public User lookupUserById(@PathParam("id") long id) {
-        User user = repository.findById(id);
-        if (user == null) {
+    public Account lookupUserById(@PathParam("id") long id) {
+        Account account = repository.findById(id);
+        if (account == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        return user;
+        return account;
     }
 
     /**
-     * Creates a new user from the values provided. Performs validation, and will return a JAX-RS response with either 200 ok,
+     * Creates a new account from the values provided. Performs validation, and will return a JAX-RS response with either 200 ok,
      * or with a map of fields, and related errors.
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createUser(User user) {
+    public Response createUser(Account account) {
 
         Response.ResponseBuilder builder = null;
-        System.out.println("creating user");
+        System.out.println("creating account");
         try {
-            // Validates user using bean validation
-            validateUser(user);
+            // Validates account using bean validation
+            validateUser(account);
 
-            registration.register(user);
+            registration.register(account);
 
             // Create an "ok" response
             builder = Response.ok();
@@ -129,28 +129,28 @@ public class UserResourceRESTService {
 
     /**
      * <p>
-     * Validates the given User variable and throws validation exceptions based on the type of error. If the error is standard
+     * Validates the given Account variable and throws validation exceptions based on the type of error. If the error is standard
      * bean validation errors then it will throw a ConstraintValidationException with the set of the constraints violated.
      * </p>
      * <p>
-     * If the error is caused because an existing user with the same email is registered it throws a regular validation
+     * If the error is caused because an existing account with the same email is registered it throws a regular validation
      * exception so that it can be interpreted separately.
      * </p>
      * 
-     * @param user User to be validated
+     * @param account Account to be validated
      * @throws ConstraintViolationException If Bean Validation errors exist
-     * @throws ValidationException If user with the same email already exists
+     * @throws ValidationException If account with the same email already exists
      */
-    private void validateUser(User user) throws ConstraintViolationException, ValidationException {
+    private void validateUser(Account account) throws ConstraintViolationException, ValidationException {
         // Create a bean validator and check for issues.
-        Set<ConstraintViolation<User>> violations = validator.validate(user);
+        Set<ConstraintViolation<Account>> violations = validator.validate(account);
 
         if (!violations.isEmpty()) {
             throw new ConstraintViolationException(new HashSet<ConstraintViolation<?>>(violations));
         }
 
         // Check the uniqueness of the email address
-        if (emailAlreadyExists(user.getEmail())) {
+        if (emailAlreadyExists(account.getFullName())) {
             throw new ValidationException("Unique Email Violation");
         }
     }
@@ -176,18 +176,18 @@ public class UserResourceRESTService {
 
     /**
      * Checks if a user with the same email address is already registered. This is the only way to easily capture the
-     * "@UniqueConstraint(columnNames = "email")" constraint from the User class.
+     * "@UniqueConstraint(columnNames = "email")" constraint from the Account class.
      * 
      * @param email The email to check
      * @return True if the email already exists, and false otherwise
      */
     public boolean emailAlreadyExists(String email) {
-        User user = null;
+        Account account = null;
         try {
-            user = repository.findByEmail(email);
+            account = repository.findByEmail(email);
         } catch (NoResultException e) {
             // ignore
         }
-        return user != null;
+        return account != null;
     }
 }

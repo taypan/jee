@@ -19,13 +19,9 @@ package cz.cvut.fel.jee.model;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -40,36 +36,28 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Data
 @Entity
 @XmlRootElement
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"), schema = "public")
-public class User implements Serializable {
-
-    public User(){}
-
-    public User(String name, String email, String username, HashSet<String> roles) {
-        this.name = name;
-        this.email = email;
-        this.username = username;
-        this.roles = roles;
-    }
+@Table(name = "account")
+public class Account implements Serializable {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private long id;
 
     @NotNull
-    @NotEmpty
-    private String name;
-
-    @NotNull
-    @NotEmpty
-    @Email
-    private String email;
-
-    @NotNull
-    @NotEmpty
     private String username;
 
-    //TODO link keycloak roles to this user
-    private HashSet<String> roles;
+    @NotNull
+    private String fullName;
 
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
+
+    public Account(){}
+
+    public Account(String username, String fullName, Set<Role> roles) {
+        this.username = username;
+        this.fullName = fullName;
+        this.roles = roles;
+    }
 }

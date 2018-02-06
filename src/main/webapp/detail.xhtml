@@ -16,7 +16,7 @@
             <!-- Here foreach with itemas -->
             <b:column span="4">
                 <h:link outcome="starter_template">
-                    <h:graphicImage class="thumbnail" value="#{imageBean.getBase64(item.id)}" dataURI="true" />
+                    <h:graphicImage class="thumbnail" value="#{imageBean.getBase64(item.id)}" dataURI="true" width="400px;" />
                 </h:link>
                 <h4>#{item.price} Kc</h4>
                 <p>#{item.description}</p>
@@ -24,8 +24,6 @@
             </b:column>
 
         </b:row>
-
-
 
     </ui:define>
 </ui:composition>

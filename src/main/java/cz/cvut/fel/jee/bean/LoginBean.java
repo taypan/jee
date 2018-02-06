@@ -1,8 +1,7 @@
 package cz.cvut.fel.jee.bean;
 
-import cz.cvut.fel.jee.model.User;
+import cz.cvut.fel.jee.model.Account;
 import lombok.Data;
-import org.keycloak.AuthorizationContext;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.KeycloakSecurityContext;
 
@@ -14,7 +13,6 @@ import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.security.Principal;
 import java.util.HashSet;
 
 @Data
@@ -48,15 +46,14 @@ public class LoginBean {
         }
     }
 
-    public User loggedUser(){
+    public Account loggedAccount(){
         HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();
         try {
             KeycloakPrincipal principal = (KeycloakPrincipal) request.getUserPrincipal();
             KeycloakSecurityContext con = (KeycloakSecurityContext) request.getSession().getAttribute(KeycloakSecurityContext.class.getName());
-            User loggedUser = new User(
-                    con.getToken().getName(),
-                    con.getToken().getEmail(),
+            Account loggedAccount = new Account(
                     con.getToken().getPreferredUsername(),
+                    con.getToken().getEmail(),
                     new HashSet<>()
             );
             System.out.println("name: " + con.getToken().getName());
@@ -64,7 +61,7 @@ public class LoginBean {
             System.out.println("username: " + con.getToken().getPreferredUsername());
             System.out.println("roles: " + con.getToken().getRealmAccess().getRoles());
 
-            return loggedUser;
+            return loggedAccount;
         }
         catch (Exception e) {
             return null;

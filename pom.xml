@@ -277,7 +277,7 @@
                 <configuration>
                     <beforeDeployment>
                         <commands>
-                            <command>data-source add --jndi-name=java:jboss/datasources/eshopDS --name=eshopDB --connection-url=jdbc:h2:mem:test;DB_CLOSE_DELAY=-1 --driver-name=h2 --user-name=sa --password=sa</command>
+                            <command>data-source add --jndi-name=java:jboss/datasources/eshopDS --name=eshopDB --connection-url=jdbc:h2:mem:test;DB_CLOSE_DELAY=-1 --driver-name=h2 --account-name=sa --password=sa</command>
                         </commands>
                     </beforeDeployment>
                 </configuration>
