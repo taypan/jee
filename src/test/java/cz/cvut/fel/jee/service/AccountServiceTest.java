@@ -1,5 +1,7 @@
-package cz.cvut.fel.jee.bean;
+package cz.cvut.fel.jee.service;
 
+import cz.cvut.fel.jee.model.Account;
+import cz.cvut.fel.jee.model.Gallery;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
@@ -11,11 +13,12 @@ import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
 
-import static org.junit.Assert.assertNotNull;
+import java.util.HashSet;
+
+import static org.junit.Assert.assertTrue;
 
 @RunWith(Arquillian.class)
-public class ShoppingCartBeanTest {
-
+public class AccountServiceTest {
     @Deployment
     public static Archive<?> createTestArchive() {
         return ShrinkWrap.create(WebArchive.class, "test.war")
@@ -26,16 +29,14 @@ public class ShoppingCartBeanTest {
     }
 
     @Inject
-    private ShoppingCartBean shoppingCartBean;
+    private AccountService accountService;
 
     @Test
-    public void deleteItemFromShoppingCart() {
-//        shoppingCartBean.addItemToShoppingCart();
-        assertNotNull("test", "test");
+    public void create() {
+        Account account = new Account("username", "fullname", new HashSet<>());
+        accountService.create(account);
+
+        assertTrue(account.getId() > 0);
     }
 
-    @Test
-    public void addItemToShoppingCart() {
-        assertNotNull("test", "test");
-    }
 }

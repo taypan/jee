@@ -1,8 +1,7 @@
 package cz.cvut.fel.jee.bean;
 
 
-import cz.cvut.fel.jee.data.GalleryRepository;
-import cz.cvut.fel.jee.model.Gallery;
+import cz.cvut.fel.jee.service.GalleryService;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
@@ -13,10 +12,10 @@ import javax.inject.Named;
 public class ImageBean {
 
     @Inject
-    private GalleryRepository galleryRepository;
+    private GalleryService galleryService;
 
     public String getBase64(Long imageId) {
-        return galleryRepository.findById(imageId).getBase64();
+        return galleryService.findById(imageId).getBase64();
     }
 
 

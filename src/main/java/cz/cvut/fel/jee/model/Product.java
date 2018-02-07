@@ -2,11 +2,9 @@ package cz.cvut.fel.jee.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.inject.Named;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -20,29 +18,29 @@ import java.io.Serializable;
 @Table(name="products")
 public class Product implements Serializable, Identifiable {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private long id;
 
     @NotNull
     @Size(min = 2, max = 25)
-    @Pattern(regexp = "[a-zA-Z0-9ěščřžýáíéúůďťó]", message = "Must contains only alfanumeric symbols and \"-\", \":\", \",\" or <space>")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Must contains only alfanumeric symbols and \"-\", \":\", \",\" or <space>")
     private String name;
 
     @NotNull
     @Size(min = 2, max = 25)
-    @Pattern(regexp = "[a-zA-Z0-9ěščřžýáíéúůďťó]", message = "Must contains only alfanumeric symbols and \"-\", \":\", \",\" or <space>")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Must contains only alfanumeric symbols and \"-\", \":\", \",\" or <space>")
     private String description;
 
     @NotNull
     @Size(min = 2, max = 25)
-    @Pattern(regexp = "[a-zA-Z0-9ěščřžýáíéúůďťó]", message = "Must contains only alfanumeric symbols and \"-\", \":\", \",\" or <space>")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Must contains only alfanumeric symbols and \"-\", \":\", \",\" or <space>")
     private String EAN;
 
     @NotNull
     @Min(0)
     private double price;
 
-    @NotNull
     @OneToOne
     @Named("gallery_id")
     private Gallery gallery;
@@ -50,16 +48,18 @@ public class Product implements Serializable, Identifiable {
     @JsonCreator
     public Product(@JsonProperty("name") String name,
                    @JsonProperty("description") String description,
-                   @JsonProperty("model") String model,
                    @JsonProperty("EAN") String EAN,
                    @JsonProperty("price") double price,
-                   @JsonProperty("gallery") long gallery) throws NamingException {
+                   @JsonProperty("gallery") Gallery gallery) throws NamingException {
+        System.out.println("name " + name);
+        System.out.println("description " + description);
+        System.out.println("EAN " + EAN);
+        System.out.println("price " + price);
         this.name = name;
         this.description = description;
         this.EAN = EAN;
         this.price = price;
-        EntityManager entityManager = InitialContext.doLookup("java:/defaultEntityManager");
-        this.gallery = entityManager.find(Gallery.class,gallery);
+        this.gallery = gallery;
     }
 
     public Product() {

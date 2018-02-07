@@ -35,13 +35,13 @@ public class AccountRESTService {
         roles.add(Role.ADMIN);
         roles.add(Role.EMPLOYEE);
         account.setRoles(roles);
-        account.setSalt(PasswordEncryptionService.generateSalt());
-        try {
-            account.setPasswordHash(PasswordEncryptionService.computeSaltedHash("default",account.getSalt(),PasswordEncryptionService.ALGORITHM_MD5));
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        }
+//        account.setSalt(PasswordEncryptionService.generateSalt());
+//        try {
+//            account.setPasswordHash(PasswordEncryptionService.computeSaltedHash("default",account.getSalt(),PasswordEncryptionService.ALGORITHM_MD5));
+//        } catch (NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//            return Response.serverError().build();
+//        }
 
         accountService.create(account);
 

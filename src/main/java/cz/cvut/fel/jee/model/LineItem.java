@@ -3,8 +3,6 @@ package cz.cvut.fel.jee.model;
 import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -21,7 +19,7 @@ public class LineItem implements Serializable,Identifiable{
     @NotNull
     private Integer amount;
 
-    @ManyToOne
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonProperty("product_id")
     @JsonIdentityReference(alwaysAsId=true)
@@ -32,9 +30,14 @@ public class LineItem implements Serializable,Identifiable{
         this.product = product;
     }
 
-    @JsonCreator
-    public LineItem(@JsonProperty("amount") Integer amount, @JsonProperty("product_id") Long productId) throws NamingException {
-        this(amount,((EntityManager)InitialContext.doLookup("java:/defaultEntityManager")).find(Product.class,productId));
+//    @JsonCreator
+//    public LineItem(@JsonProperty("amount") Integer amount, @JsonProperty("product_id") Long productId) throws NamingException {
+//        this(amount,((EntityManager)InitialContext.doLookup("java:/defaultEntityManager")).find(Product.class,productId));
+//    }
+
+    @Override
+    public String toString(){
+        return "id: " + id + ", product: " + product.getId();
     }
 
 }

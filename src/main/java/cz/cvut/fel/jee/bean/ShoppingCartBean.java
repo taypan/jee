@@ -1,11 +1,10 @@
 package cz.cvut.fel.jee.bean;
 
 
-import cz.cvut.fel.jee.data.GalleryRepository;
 import cz.cvut.fel.jee.data.LineItemRepository;
-import cz.cvut.fel.jee.data.ProductRepository;
-import cz.cvut.fel.jee.data.ShoppingCartRepository;
 import cz.cvut.fel.jee.model.LineItem;
+import cz.cvut.fel.jee.model.Product;
+import cz.cvut.fel.jee.service.ShoppingCartService;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
@@ -24,16 +23,16 @@ public class ShoppingCartBean {
     private LoginBean loginBean;
 
     @Inject
-    private ShoppingCartRepository shoppingCartRepository;
+    private ShoppingCartService shoppingCartService;
 
     public void deleteItemFromShoppingCart(){
 
     }
 
-    public void addItemToShoppingCart(long productId, int amount) throws NamingException {
-        shoppingCartRepository.addItem(
+    public void addItemToShoppingCart(Product product, int amount) throws NamingException {
+        shoppingCartService.addItem(
                 loginBean.loggedAccount(),
-                new LineItem(amount, productId)
+                new LineItem(amount, product)
         );
     }
 

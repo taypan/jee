@@ -40,7 +40,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name = "account")
 @AllArgsConstructor
 @EqualsAndHashCode
-public class Account implements Serializable {
+public class Account implements Serializable, Identifiable {
 
     @Id
     @GeneratedValue

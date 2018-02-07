@@ -1,4 +1,4 @@
-package cz.cvut.fel.jee.data;
+package cz.cvut.fel.jee.service;
 
 import cz.cvut.fel.jee.model.*;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -19,7 +19,7 @@ import java.util.HashSet;
 import static org.junit.Assert.*;
 
 @RunWith(Arquillian.class)
-public class ShoppingCartRepositoryTest {
+public class ShoppingCartServiceTest {
     @Deployment
     public static Archive<?> createTestArchive() {
         return ShrinkWrap.create(WebArchive.class, "test.war")
@@ -30,29 +30,42 @@ public class ShoppingCartRepositoryTest {
     }
 
     @Inject
-    private ShoppingCartRepository shoppingCartRepository;
+    private ShoppingCartService shoppingCartService;
 
     @Inject
-    private ProductRepository productRepository;
+    private ProductService productService;
 
     @Inject
-    private GalleryRepository galleryRepository;
+    private GalleryService galleryService;
+
+    @Inject
+    private LineItemService lineItemService;
 
     @Test
     public void addItemToNonexistCart() throws NamingException {
         Gallery gallery = new Gallery("name", "base64");
-        galleryRepository.create(gallery);
-        Product product = new Product("name", "description", "model", "EAN", 1.1, gallery.getId());
-        productRepository.create(product);
+        galleryService.create(gallery);
+        Product product = new Product("name", "description", "EAN", 1.1, gallery);
+        productService.create(product);
+        LineItem lineItem = new LineItem(8, product);
+        lineItemService.create(lineItem);
+
         Account account = new Account(99L, "username", "fullname", new HashSet<>());
 
-        ShoppingCart shoppingCart = shoppingCartRepository.addItem(
+        System.out.println("PRODUCT> " + product.getId());
+
+        ShoppingCart shoppingCart = shoppingCartService.addItem(
                 account,
-                new LineItem(8, product.getId())
+                lineItem
         );
-        assertEquals(account, shoppingCart.getAccount());
+
+        System.out.println("test2");
+        System.out.println(account.getId());
+
+        assertEquals(account.getId(), shoppingCart.getAccount());
         assertEquals(1, shoppingCart.getItems().size());
         for(LineItem item : shoppingCart.getItems()) {
+            System.out.println("ITEM: " + item);
             assertEquals(8, item.getAmount().intValue());
         }
     }

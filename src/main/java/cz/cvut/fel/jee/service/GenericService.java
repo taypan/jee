@@ -44,11 +44,8 @@ public class GenericService<T extends Serializable & Identifiable> {
         return entityManager.find(clazz, id);
     }
 
-    public void update(T entity) throws Exception {
-        //T entityOrig = entityManager.find(clazz,entity.getId());
+    public void update(T entity) {
         entityManager.merge(entity);
-        //parent2.setName(parent.getName());
-        //parent2.setChild(parent.getChild());
     }
 
     public void delete(T entity){
