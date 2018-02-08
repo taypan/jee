@@ -20,8 +20,10 @@
                 <h4>#{item.price} Kc</h4>
                 <p>#{item.description}</p>
                 <h:form>
-                    <h:commandLink action="#{shoppingBean.addItemToShoppingCart(1, 1)}" value="Koupit jeden">
-                    </h:commandLink>
+                    <h:commandButton action="#{shoppingBean.addItemToShoppingCart}" value="Koupit jeden">
+                        <f:param name="productId" value="#{item.id}" />
+                        <f:param name="amount" value="1" />
+                    </h:commandButton>
                 </h:form>
             </b:column>
 

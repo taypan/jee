@@ -10,15 +10,18 @@ import cz.cvut.fel.jee.service.ShoppingCartService;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.naming.NamingException;
 import java.io.IOException;
+import java.util.Map;
 
 //TODO pak predelat na vaskovi classy
 @Named
-@ApplicationScoped
+@SessionScoped
 @ManagedBean(name = "shoppingBean")
 public class ShoppingCartBean {
 
@@ -39,6 +42,14 @@ public class ShoppingCartBean {
 
     public void deleteItemFromShoppingCart(){
 
+    }
+
+    public void addItemToShoppingCart() throws IOException {
+        Map<String,String> params = context.getExternalContext().getRequestParameterMap();
+        addItemToShoppingCart(
+                Long.parseLong(params.get("productId")),
+                Integer.parseInt(params.get("amount"))
+        );
     }
 
     public void addItemToShoppingCart(long productId, int amount) throws IOException {
