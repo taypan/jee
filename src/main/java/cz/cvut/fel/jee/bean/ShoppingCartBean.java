@@ -4,6 +4,7 @@ package cz.cvut.fel.jee.bean;
 import cz.cvut.fel.jee.data.LineItemRepository;
 import cz.cvut.fel.jee.model.LineItem;
 import cz.cvut.fel.jee.model.Product;
+import cz.cvut.fel.jee.model.ShoppingCart;
 import cz.cvut.fel.jee.service.LineItemService;
 import cz.cvut.fel.jee.service.ProductService;
 import cz.cvut.fel.jee.service.ShoppingCartService;
@@ -17,11 +18,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.naming.NamingException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-//TODO pak predelat na vaskovi classy
 @Named
-@SessionScoped
+@ApplicationScoped
 @ManagedBean(name = "shoppingBean")
 public class ShoppingCartBean {
 
@@ -40,8 +42,19 @@ public class ShoppingCartBean {
     @Inject
     private FacesContext context;
 
-    public void deleteItemFromShoppingCart(){
+    public List<LineItem> getAllItem(){
+        ShoppingCart byAccount = shoppingCartService.findByAccount(loginBean.loggedAccount());
+        if(byAccount==null){
+            return new ArrayList<>();
+        }
+        return byAccount.getItems();
+    }
 
+    public void deleteItemFromShoppingCart(long listItemId){
+        shoppingCartService.removeLineItem(
+                loginBean.loggedAccount(),
+                lineItemService.findById(listItemId)
+        );
     }
 
     public void addItemToShoppingCart() throws IOException {

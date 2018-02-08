@@ -24,7 +24,7 @@ public class ShoppingCart implements Serializable, Identifiable {
 //    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     private long account;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonProperty("item_ids")
     @JsonIdentityReference(alwaysAsId=true)

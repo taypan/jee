@@ -21,7 +21,7 @@ public class LineItem implements Serializable,Identifiable{
     @NotNull
     private Integer amount;
 
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonProperty("product_id")
     @JsonIdentityReference(alwaysAsId=true)

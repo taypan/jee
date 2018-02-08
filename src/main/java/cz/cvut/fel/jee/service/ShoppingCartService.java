@@ -3,22 +3,12 @@ package cz.cvut.fel.jee.service;
 import cz.cvut.fel.jee.model.Account;
 import cz.cvut.fel.jee.model.LineItem;
 import cz.cvut.fel.jee.model.ShoppingCart;
-import cz.cvut.fel.jee.model.ShoppingCart_;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
-import javax.naming.NamingException;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import javax.persistence.metamodel.EntityType;
-import javax.persistence.metamodel.Metamodel;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -40,6 +30,13 @@ public class ShoppingCartService extends GenericService<ShoppingCart>{
         super.entityManager = this.entityManager;
     }
 
+    public void removeLineItem(Account account, LineItem item){
+        ShoppingCart shoppingCart = findByAccount(account);
+        LineItem foundedItem = findItemInCart(shoppingCart, item);
+        shoppingCart.getItems().remove(foundedItem);
+        update(shoppingCart);
+    }
+
     public ShoppingCart addItem(Account account, LineItem item) {
         ShoppingCart shoppingCart = findByAccount(account);
         if(shoppingCart == null){
@@ -48,13 +45,7 @@ public class ShoppingCartService extends GenericService<ShoppingCart>{
         }
 
         System.out.println();
-        LineItem newItem = null;
-        for(LineItem lineItem : shoppingCart.getItems()){
-            if(lineItem.getProduct().getId() == item.getProduct().getId()){
-                newItem = lineItem;
-                break;
-            }
-        }
+        LineItem newItem = findItemInCart(shoppingCart, item);
 
         System.out.println("FOUNDED ITEM: " + newItem);
         if(newItem == null){
@@ -77,6 +68,7 @@ public class ShoppingCartService extends GenericService<ShoppingCart>{
 
     public ShoppingCart findByAccount(Account account){
         System.out.println("TEST QUERY2: " + account.getId());
+        //todo by account
         List<ShoppingCart> all = findAll();
         if (all.size() == 0){
             return null;
@@ -85,5 +77,15 @@ public class ShoppingCartService extends GenericService<ShoppingCart>{
         }
     }
 
+    private LineItem findItemInCart(ShoppingCart shoppingCart, LineItem item){
+        LineItem foundedItem = null;
+        for(LineItem lineItem : shoppingCart.getItems()){
+            if(lineItem.getProduct().getId() == item.getProduct().getId()){
+                foundedItem = lineItem;
+                break;
+            }
+        }
+        return foundedItem;
+    }
 
 }

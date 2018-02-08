@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<ui:composition template="/applayout/pageTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="content">
+        <h:outputStylesheet library="bsf" name="css/thumbnails.css"/>
+
+
+        <h2>CART</h2>
+        <h:panelGroup rendered="#{empty shoppingBean.allItem}">
+            <em>No items in cart.</em>
+        </h:panelGroup>
+        <h:dataTable var="_item" value="#{shoppingBean.allItem}"
+                     rendered="#{not empty shoppingBean.allItem}"
+                     styleClass="simpletablestyle">
+            <h:column>
+                <f:facet name="header">Id</f:facet>
+                #{_item.id}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Amount</f:facet>
+                #{_item.amount}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                #{_item.product.name}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Remove item #</f:facet>
+                <h:form>
+                    <h:commandButton action="#{shoppingBean.deleteItemFromShoppingCart(_item.id)}" value="ODSTRANIT">
+                    </h:commandButton>
+                </h:form>
+            </h:column>
+        </h:dataTable>
+
+    </ui:define>
+</ui:composition>
