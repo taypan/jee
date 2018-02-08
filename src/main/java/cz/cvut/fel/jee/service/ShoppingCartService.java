@@ -68,13 +68,16 @@ public class ShoppingCartService extends GenericService<ShoppingCart>{
 
     public ShoppingCart findByAccount(Account account){
         System.out.println("TEST QUERY2: " + account.getId());
-        //todo by account
         List<ShoppingCart> all = findAll();
         if (all.size() == 0){
             return null;
         }else{
             return all.get(0);
         }
+    }
+
+    public void deleteByAccount(Account account){
+        delete(findByAccount(account));
     }
 
     private LineItem findItemInCart(ShoppingCart shoppingCart, LineItem item){

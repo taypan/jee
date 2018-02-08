@@ -37,5 +37,9 @@
             </h:column>
         </h:dataTable>
 
+        <h:panelGroup rendered="#{not empty shoppingBean.allItem}">
+            <h:link value="Order" outcome="order" />
+        </h:panelGroup>
+
     </ui:define>
 </ui:composition>

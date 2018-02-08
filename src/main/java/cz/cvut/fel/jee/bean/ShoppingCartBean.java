@@ -50,6 +50,15 @@ public class ShoppingCartBean {
         return byAccount.getItems();
     }
 
+    public double getItemPrice(){
+        List<LineItem> allItem = getAllItem();
+        double sum = 0;
+        for (LineItem i : allItem){
+            sum += i.getAmount() * i.getProduct().getPrice();
+        }
+        return sum;
+    }
+
     public void deleteItemFromShoppingCart(long listItemId){
         shoppingCartService.removeLineItem(
                 loginBean.loggedAccount(),

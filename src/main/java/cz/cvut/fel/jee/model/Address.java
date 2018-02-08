@@ -1,15 +1,16 @@
 package cz.cvut.fel.jee.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.Data;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
  * @author Vaclav Rechtberger
  */
+@Data
 @Entity
 @Table(name="addresses")
 public class Address implements Serializable, Identifiable {
@@ -17,19 +18,19 @@ public class Address implements Serializable, Identifiable {
     @GeneratedValue
     private long id;
 
-    @NotNull
+    @NotEmpty
     private String houseNumber;
 
-    @NotNull
+    @NotEmpty
     private String street;
 
-    @NotNull
+    @NotEmpty
     private String city;
 
-    @NotNull
+    @NotEmpty
     private String code;
 
-    @NotNull
+    @NotEmpty
     private String country;
 
     public Address(String houseNumber, String street, String city, String code, String country) {
@@ -43,51 +44,4 @@ public class Address implements Serializable, Identifiable {
     public Address() {
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getHouseNumber() {
-        return houseNumber;
-    }
-
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
 }

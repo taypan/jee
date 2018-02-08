@@ -33,7 +33,7 @@ public class Order implements Serializable, Identifiable {
 
     private long paid;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonProperty("address_id")
     @JsonIdentityReference(alwaysAsId=true)
