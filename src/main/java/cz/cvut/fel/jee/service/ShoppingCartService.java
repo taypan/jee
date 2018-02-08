@@ -48,26 +48,29 @@ public class ShoppingCartService extends GenericService<ShoppingCart>{
         }
 
         System.out.println();
-        System.out.println("Line item OK");
         LineItem newItem = null;
         for(LineItem lineItem : shoppingCart.getItems()){
-            if(lineItem.getId() == item.getId()){
-                newItem = new LineItem(lineItem.getAmount() + item.getAmount(), lineItem.getProduct());
-                shoppingCart.getItems().remove(lineItem);
+            if(lineItem.getProduct().getId() == item.getProduct().getId()){
+                newItem = lineItem;
+                break;
             }
         }
 
         System.out.println("FOUNDED ITEM: " + newItem);
         if(newItem == null){
             newItem = item;
-            System.out.println("NEW ITEM: " + newItem);
+            shoppingCart.getItems().add(newItem);
+            create(shoppingCart);
+        }else{
+            shoppingCart.getItems().remove(newItem);
+            newItem.setAmount(newItem.getAmount() + item.getAmount());
+            shoppingCart.getItems().add(newItem);
+            update(shoppingCart);
         }
 
         System.out.println("ADD ITEM: " + item.getId());
-        shoppingCart.getItems().add(newItem);
-        System.out.println("GET ITEMS: " + shoppingCart.getItems().get(0).getId());
-
-        create(shoppingCart);
+        System.out.println("GET FIRST ITEM ID: " + shoppingCart.getItems().get(0).getId());
+        System.out.println("GET FIRST ITEM COUNT: " + shoppingCart.getItems().get(0).getAmount());
 
         return shoppingCart;
     }

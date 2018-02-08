@@ -13,14 +13,16 @@
         <h1>Detail - #{item.name}</h1>
 
         <b:row>
-            <!-- Here foreach with itemas -->
             <b:column span="4">
                 <h:link outcome="starter_template">
                     <h:graphicImage class="thumbnail" value="#{imageBean.getBase64(item.id)}" dataURI="true" width="400px;" />
                 </h:link>
                 <h4>#{item.price} Kc</h4>
                 <p>#{item.description}</p>
-                <p>Koupit</p>
+                <h:form>
+                    <h:commandLink action="#{shoppingBean.addItemToShoppingCart(1, 1)}" value="Koupit jeden">
+                    </h:commandLink>
+                </h:form>
             </b:column>
 
         </b:row>

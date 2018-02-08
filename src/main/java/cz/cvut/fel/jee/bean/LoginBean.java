@@ -52,6 +52,7 @@ public class LoginBean {
             KeycloakPrincipal principal = (KeycloakPrincipal) request.getUserPrincipal();
             KeycloakSecurityContext con = (KeycloakSecurityContext) request.getSession().getAttribute(KeycloakSecurityContext.class.getName());
             Account loggedAccount = new Account(
+                    hash(con.getToken().getId()),
                     con.getToken().getPreferredUsername(),
                     con.getToken().getEmail(),
                     new HashSet<>()
@@ -66,7 +67,17 @@ public class LoginBean {
         catch (Exception e) {
             return null;
         }
-
     }
+
+    private static long hash(String string) {
+        long h = 1125899906842597L; // prime
+        int len = string.length();
+
+        for (int i = 0; i < len; i++) {
+            h = 31*h + string.charAt(i);
+        }
+        return h;
+    }
+
 
 }
