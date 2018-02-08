@@ -45,8 +45,8 @@ public class ShoppingCart implements Serializable, Identifiable {
 //            @JsonProperty("account_id") long accountId,
 //            @JsonProperty("item_ids") Set<Long> itemsIds) throws NamingException {
 //        final EntityManager entityManager = InitialContext.doLookup("java:/defaultEntityManager");
-//        this.account = entityManager.find(Account.class, accountId);
-//        this.account = entityManager.find(Account.class, accountId);
+//        this.accountId = entityManager.find(Account.class, accountId);
+//        this.accountId = entityManager.find(Account.class, accountId);
 //        this.items = itemsIds.stream().map(itemId -> entityManager.find(LineItem.class, itemId)).collect(Collectors.toSet());
 //    }
 
